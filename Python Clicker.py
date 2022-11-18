@@ -263,56 +263,56 @@ def shop(type):
     global in_shop, num_cursor, cost_cursor, num_grandma, cost_grandma, num_farm, cost_farm, num_mine, cost_mine, num_factory, cost_factory, num_bank, cost_bank, num_temple, cost_temple, num_wiz, cost_wiz, num_ship, cost_ship, num_alc, cost_alc, num_port, cost_port, num_tima, cost_tima
     type = type.lower()
 
-    if type == "cursor":
+    if type == "cursor" or type == "1":
         num_cursor, cost_cursor = (purchase(type, num_cursor, cost_cursor, 15, input("\tAmount: ")))
-    elif type == "grandma":
+    elif type == "grandma" or type == "2":
         num_grandma, cost_grandma = (purchase(type, num_grandma, cost_grandma, 100, input("\tAmount: ")))
-    elif type == "farm" and num_grandma > 0:
+    elif (type == "farm" or type == "3") and num_grandma > 0:
         num_farm, cost_farm = (purchase(type, num_farm, cost_farm, 1100, input("\tAmount: ")))
-    elif type == "mine" and num_farm > 0:
+    elif (type == "mine" or type == "4") and num_farm > 0:
         num_mine, cost_mine = (purchase(type, num_mine, cost_mine, 12000, input("\tAmount: ")))
-    elif type == "factory" and num_mine > 0:
+    elif (type == "factory" or type == "5") and num_mine > 0:
         num_factory, cost_factory = (purchase(type, num_factory, cost_factory, 130000, input("\tAmount: ")))
-    elif type == "bank" and num_factory > 0:
+    elif (type == "bank" or type == "6") and num_factory > 0:
         num_bank, cost_bank = (purchase(type, num_bank, cost_bank, 1400000, input("\tAmount: ")))
-    elif type == "temple" and num_bank > 0:
+    elif (type == "temple" or type == "7") and num_bank > 0:
         num_temple, cost_temple = (purchase(type, num_temple, cost_temple, 20000000, input("\tAmount: ")))
-    elif type == "wizard tower" and num_temple > 0:
+    elif (type == "wizard tower" or type == "8") and num_temple > 0:
         num_wiz, cost_wiz = (purchase(type, num_wiz, cost_wiz, 330000000, input("\tAmount: ")))
-    elif type == "shipment" and num_wiz > 0:
+    elif (type == "shipment" or type == "9") and num_wiz > 0:
         num_ship, cost_ship = (purchase(type, num_ship, cost_ship, 5100000000, input("\tAmount: ")))
-    elif type == "alchemy lab" and num_ship > 0:
+    elif (type == "alchemy lab" or type == "10") and num_ship > 0:
         num_alc, cost_alc = (purchase(type, num_alc, cost_alc, 75000000000, input("\tAmount: ")))
-    elif type == "portal" and num_alc > 0:
+    elif (type == "portal" or type == "11") and num_alc > 0:
         num_port, cost_port = (purchase(type, num_port, cost_port, 1000000000000, input("\tAmount: ")))
-    elif type == "time machine" and num_port > 0:
+    elif (type == "time machine" or type == "12") and num_port > 0:
         num_tima, cost_tima = (purchase(type, num_tima, cost_tima, 14000000000000, input("\tAmount: ")))
     
     elif "desc" in type:
         clear()
-        if type == "desc.cursor":
+        if type == "desc.cursor" or type == "desc.1":
             print("[Cursor] --> Clicks cookies alongside you. Who controls them...?; increases clicks per click by 0.1")
-        elif type == "desc.grandma":
+        elif type == "desc.grandma" or type == "desc.2":
             print("[Grandma] --> Bakes for you. How nice!; increases clicks per click by 1")
-        elif type == "desc.farm" and num_grandma > 0:
+        elif (type == "desc.farm" or type == "desc.3") and num_grandma > 0:
             print("[Farm] --> Grows cookies for harvesting. Don't think about it too hard; increases clicks per click by 8")
-        elif type == "desc.mine" and num_farm > 0:
+        elif (type == "desc.mine" or type == "desc.4") and num_farm > 0:
             print("[Mine] --> Extracts the natural cookies of the Earth. What, you didn't know about that?; increases clicks per click by 47")
-        elif type == "desc.factory" and num_mine > 0:
+        elif (type == "desc.factory" or type == "desc.5") and num_mine > 0:
             print("[Factory] --> Mass-produces cookies on a global scale. It's not a monopoly, it's business; increases clicks per click by 260")
-        elif type == "desc.bank" and num_factory > 0:
+        elif (type == "desc.bank" or type == "desc.6") and num_factory > 0:
             print("[Bank] --> Take out a copious number of cookie loans. Bad credit?\n\nWell i was shopping for a new car which ones me?\nA cool convertible or an SUV\nToo bad i didn't know my credit was whack and now I'm driving off the lot in a used sub-compact\nF-R-E-E that spells free. creditreport.com baby\nSaw their ads on my TV, thought about going but was too lazy\nNow instead of looking fly and rolling fat My legs are sticking to the vinyl and my posses getting laughed at!\nF-R-E-E that spell free. creditreport.com baby!;\n\nincreases clicks per click by 1.4K")
-        elif type == "desc.temple" and num_bank > 0:
+        elif (type == "desc.temple" or type == "desc.7") and num_bank > 0:
             print("[Temple] --> Pray to the Cookie Gods, I'm sure they'll love you; increases clicks per click by 7.8K")
-        elif type == "desc.wizard tower" and num_temple > 0:
+        elif (type == "desc.wizard tower" or type == "desc.8") and num_temple > 0:
             print("[Wizard Tower] --> Enlist the help of Cookie Wizards throughout the world; increases clicks per click by 44K")
-        elif type == "desc.shipment" and num_wiz > 0:
+        elif (type == "desc.shipment" or type == "desc.9") and num_wiz > 0:
             print("[Shipment] --> Order shipments of cookies from far off planets. Did someone order a package?; increases clicks per click by 260K")
-        elif type == "desc.alchemy lab" and num_ship > 0:
+        elif (type == "desc.alchemy lab" or type == "desc.10") and num_ship > 0:
             print("[Alchemy Lab] --> Synthesize cookies to your heart's content. Are we breaking any natural laws here?; increases clicks per click by 1.6M")
-        elif type == "desc.portal" and num_alc > 0:
+        elif (type == "desc.portal" or type == "desc.11") and num_alc > 0:
             print("[Portal] --> Open a portal to the Cookie Dimension. Shovel as many cookies as you can before the spacetime-continuum collapses; increases clicks per click by 10M")
-        elif type == "desc.time machine" and num_port > 0:
+        elif (type == "desc.time machine" or type == "desc.12") and num_port > 0:
             print("[Time Machine] --> Travel back in time and steal the cookies yet to be baked. Try not to make out with your mom; increases clicks per click by 65M")
         else:
             print("Input not recognized or building not unlocked")
@@ -485,47 +485,47 @@ num_tima = %d
         in_shop = True
         while(in_shop):
             print("Enter building name or type 'desc.BUILDING NAME' or type 'exit'")
-            print("[Cookies: %s]\n\nCursor --> [%s cookies]\nGrandma --> [%s cookies]" % (display_num(current_cookies), display_num(cost_cursor), display_num(cost_grandma)))
+            print("[Cookies: %s]\n\n[1] Cursor --> [%s cookies]\n[2] Grandma --> [%s cookies]" % (display_num(current_cookies), display_num(cost_cursor), display_num(cost_grandma)))
             if num_grandma > 0:
-                print("Farm --> [%s cookies]" % display_num(cost_farm))
+                print("[3] Farm --> [%s cookies]" % display_num(cost_farm))
             else:
-                print("???? --> [??? cookies]")
+                print("[3] ???? --> [??? cookies]")
             if num_farm > 0:
-                print("Mine --> [%s cookies]" % display_num(cost_mine))
+                print("[4] Mine --> [%s cookies]" % display_num(cost_mine))
             else:
-                print("???? --> [??? cookies]")
+                print("[4] ???? --> [??? cookies]")
             if num_mine > 0:
-                print("Factory --> [%s cookies]" % display_num(cost_factory))
+                print("[5] Factory --> [%s cookies]" % display_num(cost_factory))
             else:
-                print("??????? --> [??? cookies]")
+                print("[5] ??????? --> [??? cookies]")
             if num_factory > 0:
-                print("Bank --> [%s cookies]" % display_num(cost_bank))
+                print("[6] Bank --> [%s cookies]" % display_num(cost_bank))
             else:
-                print("???? --> [??? cookies]")
+                print("[6] ???? --> [??? cookies]")
             if num_bank > 0:
-                print("Temple --> [%s cookies]" % display_num(cost_temple))
+                print("[7] Temple --> [%s cookies]" % display_num(cost_temple))
             else:
-                print("?????? --> [??? cookies]")
+                print("[7] ?????? --> [??? cookies]")
             if num_temple > 0:
-                print("Wizard Tower --> [%s cookies]" % display_num(cost_wiz))
+                print("[8] Wizard Tower --> [%s cookies]" % display_num(cost_wiz))
             else:
-                print("?????? ????? --> [??? cookies]")
+                print("[8] ?????? ????? --> [??? cookies]")
             if num_wiz > 0:
-                print("Shipment --> [%s cookies]" % display_num(cost_ship))
+                print("[9] Shipment --> [%s cookies]" % display_num(cost_ship))
             else:
-                print("???????? --> [??? cookies]")
+                print("[9] ???????? --> [??? cookies]")
             if num_ship > 0:
-                print("Alchemy Lab --> [%s cookies]" % display_num(cost_alc))
+                print("[10] Alchemy Lab --> [%s cookies]" % display_num(cost_alc))
             else:
-                print("??????? ??? --> [??? cookies]")
+                print("[10] ??????? ??? --> [??? cookies]")
             if num_alc > 0:
-                print("Portal --> [%s cookies]" % display_num(cost_port))
+                print("[11] Portal --> [%s cookies]" % display_num(cost_port))
             else:
-                print("?????? --> [??? cookies]")
+                print("[11] ?????? --> [??? cookies]")
             if num_port > 0:
-                print("Time Machine --> [%s cookies]" % display_num(cost_tima))
+                print("[12] Time Machine --> [%s cookies]" % display_num(cost_tima))
             else:
-                print("???? ??????? --> [??? cookies]")
+                print("[12] ???? ??????? --> [??? cookies]")
             shop(input("\nEnter shop command: "))
     
     # save
