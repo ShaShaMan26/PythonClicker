@@ -451,7 +451,25 @@ while(True):
     # stats
     elif user_input == "/st" or user_input == "stats":
         clear()
-        print("You have cooked %s total cookies.\nYou currently have %s cookies.\nclick_power = %s\nnum_click = %s\ngc_got = %s\ngc_miss = %s\nnum_cursor = %d\nnum_grandma = %d\nnum_farm = %d\nnum_mine = %d\nnum_factory = %d\nnum_bank = %d\n" % (display_num2(total_cookies), display_num2(current_cookies), display_num2(click_power), num_click, gc_got, gc_miss, num_cursor, num_grandma, num_farm, num_mine, num_factory, num_bank))
+        print("""You have cooked %s total cookies.
+You currently have %s cookies.
+click_power = %s
+num_click = %s
+gc_got = %s
+gc_miss = %s
+num_cursor = %d
+num_grandma = %d
+num_farm = %d
+num_mine = %d
+num_factory = %d
+num_bank = %d
+num_temple = %d
+num_wiz = %d
+num_ship = %d
+num_alc = %d
+num_port = %d
+num_tima = %d
+""" % (display_num2(total_cookies), display_num2(current_cookies), display_num2(click_power), num_click, gc_got, gc_miss, num_cursor, num_grandma, num_farm, num_mine, num_factory, num_bank, num_temple, num_wiz, num_ship, num_alc, num_port, num_tima))
     
     # enter shop
     elif user_input == "/s" or user_input == "shop":
@@ -527,7 +545,7 @@ while(True):
             save_file.close()
             clear()
             print("All save data erased")
-            time.wait(2)
+            time.sleep(2)
             break
         else:
             clear()
