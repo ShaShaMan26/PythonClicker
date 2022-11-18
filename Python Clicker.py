@@ -264,28 +264,40 @@ def shop(type):
     type = type.lower()
 
     if type == "cursor" or type == "1":
+        type == "cursor"
         num_cursor, cost_cursor = (purchase(type, num_cursor, cost_cursor, 15, input("\tAmount: ")))
     elif type == "grandma" or type == "2":
+        type == "grandma"
         num_grandma, cost_grandma = (purchase(type, num_grandma, cost_grandma, 100, input("\tAmount: ")))
     elif (type == "farm" or type == "3") and num_grandma > 0:
+        type == "farm"
         num_farm, cost_farm = (purchase(type, num_farm, cost_farm, 1100, input("\tAmount: ")))
     elif (type == "mine" or type == "4") and num_farm > 0:
+        type == "mine"
         num_mine, cost_mine = (purchase(type, num_mine, cost_mine, 12000, input("\tAmount: ")))
     elif (type == "factory" or type == "5") and num_mine > 0:
+        type == "factory"
         num_factory, cost_factory = (purchase(type, num_factory, cost_factory, 130000, input("\tAmount: ")))
     elif (type == "bank" or type == "6") and num_factory > 0:
+        type == "bank"
         num_bank, cost_bank = (purchase(type, num_bank, cost_bank, 1400000, input("\tAmount: ")))
     elif (type == "temple" or type == "7") and num_bank > 0:
+        type == "temple"
         num_temple, cost_temple = (purchase(type, num_temple, cost_temple, 20000000, input("\tAmount: ")))
     elif (type == "wizard tower" or type == "8") and num_temple > 0:
+        type == "wizard tower"
         num_wiz, cost_wiz = (purchase(type, num_wiz, cost_wiz, 330000000, input("\tAmount: ")))
     elif (type == "shipment" or type == "9") and num_wiz > 0:
+        type == "shipment"
         num_ship, cost_ship = (purchase(type, num_ship, cost_ship, 5100000000, input("\tAmount: ")))
     elif (type == "alchemy lab" or type == "10") and num_ship > 0:
+        type == "alchemy lab"
         num_alc, cost_alc = (purchase(type, num_alc, cost_alc, 75000000000, input("\tAmount: ")))
     elif (type == "portal" or type == "11") and num_alc > 0:
+        type == "portal"
         num_port, cost_port = (purchase(type, num_port, cost_port, 1000000000000, input("\tAmount: ")))
     elif (type == "time machine" or type == "12") and num_port > 0:
+        type == "time machine"
         num_tima, cost_tima = (purchase(type, num_tima, cost_tima, 14000000000000, input("\tAmount: ")))
     
     elif "desc" in type:
