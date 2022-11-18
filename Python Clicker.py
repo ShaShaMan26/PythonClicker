@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 
+'''
+Python Clicker
+
+Small-scale Python terminal remake of Cookie Clicker made by Cristiano Porretta for Python I final project.
+
+Original source: https://github.com/ShaShaMan26/PythonClicker
+'''
+
 import random
 import time
 import os
