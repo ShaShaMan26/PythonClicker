@@ -264,29 +264,29 @@ def shop(type):
     type = type.lower()
 
     if type == "cursor":
-        num_cursor, cost_cursor = (purchase(type, num_cursor, cost_cursor, input("\tAmount: ")))
+        num_cursor, cost_cursor = (purchase(type, num_cursor, cost_cursor, 15, input("\tAmount: ")))
     elif type == "grandma":
-        num_grandma, cost_grandma = (purchase(type, num_grandma, cost_grandma, input("\tAmount: ")))
+        num_grandma, cost_grandma = (purchase(type, num_grandma, cost_grandma, 100, input("\tAmount: ")))
     elif type == "farm" and num_grandma > 0:
-        num_farm, cost_farm = (purchase(type, num_farm, cost_farm, input("\tAmount: ")))
+        num_farm, cost_farm = (purchase(type, num_farm, cost_farm, 1100, input("\tAmount: ")))
     elif type == "mine" and num_farm > 0:
-        num_mine, cost_mine = (purchase(type, num_mine, cost_mine, input("\tAmount: ")))
+        num_mine, cost_mine = (purchase(type, num_mine, cost_mine, 12000, input("\tAmount: ")))
     elif type == "factory" and num_mine > 0:
-        num_factory, cost_factory = (purchase(type, num_factory, cost_factory, input("\tAmount: ")))
+        num_factory, cost_factory = (purchase(type, num_factory, cost_factory, 130000, input("\tAmount: ")))
     elif type == "bank" and num_factory > 0:
-        num_bank, cost_bank = (purchase(type, num_bank, cost_bank, input("\tAmount: ")))
+        num_bank, cost_bank = (purchase(type, num_bank, cost_bank, 1400000, input("\tAmount: ")))
     elif type == "temple" and num_bank > 0:
-        num_temple, cost_temple = (purchase(type, num_temple, cost_temple, input("\tAmount: ")))
+        num_temple, cost_temple = (purchase(type, num_temple, cost_temple, 20000000, input("\tAmount: ")))
     elif type == "wizard tower" and num_temple > 0:
-        num_wiz, cost_wiz = (purchase(type, num_wiz, cost_wiz, input("\tAmount: ")))
+        num_wiz, cost_wiz = (purchase(type, num_wiz, cost_wiz, 330000000, input("\tAmount: ")))
     elif type == "shipment" and num_wiz > 0:
-        num_ship, cost_ship = (purchase(type, num_ship, cost_ship, input("\tAmount: ")))
+        num_ship, cost_ship = (purchase(type, num_ship, cost_ship, 5100000000, input("\tAmount: ")))
     elif type == "alchemy lab" and num_ship > 0:
-        num_alc, cost_alc = (purchase(type, num_alc, cost_alc, input("\tAmount: ")))
+        num_alc, cost_alc = (purchase(type, num_alc, cost_alc, 75000000000, input("\tAmount: ")))
     elif type == "portal" and num_alc > 0:
-        num_port, cost_port = (purchase(type, num_port, cost_port, input("\tAmount: ")))
+        num_port, cost_port = (purchase(type, num_port, cost_port, 1000000000000, input("\tAmount: ")))
     elif type == "time machine" and num_port > 0:
-        num_tima, cost_tima = (purchase(type, num_tima, cost_tima, input("\tAmount: ")))
+        num_tima, cost_tima = (purchase(type, num_tima, cost_tima, 14000000000000, input("\tAmount: ")))
     
     elif "desc" in type:
         clear()
@@ -326,14 +326,14 @@ def shop(type):
         clear()
         print("Input error\n")
 
-def purchase(building, num_build, cost_build, amount):
+def purchase(building, num_build, cost_build, initial_cost, amount):
     global current_cookies
     if amount.lower() == "max":
         clear()
         while(current_cookies >= cost_build):
             current_cookies -= float(cost_build)
             num_build += 1
-            cost_build *= (1.15 ** num_build)
+            cost_build = initial_cost * (1.15 ** num_build)
     elif int(amount) >= 1:
         amount = int(amount)
         clear()
@@ -341,7 +341,7 @@ def purchase(building, num_build, cost_build, amount):
             while(amount >= 1 and current_cookies >= cost_build):
                 current_cookies -= float(cost_build)
                 num_build += 1
-                cost_build *= (1.15 ** num_build)
+                cost_build = initial_cost * (1.15 ** num_build)
                 amount -= 1
         else:
             print("You dont have enough cookies to buy [%d] %s(s)." % (amount, building))
