@@ -8,13 +8,12 @@ Small-scale Python terminal remake of Cookie Clicker made by Cristiano Porretta 
 Original source: https://github.com/ShaShaMan26/PythonClicker
 '''
 
-import random
-import time
-import os
-import sys
+# imports
+import random, time, os, sys, datetime
 
+# load save function
 def load():
-    global total_cookies, current_cookies, num_click, gc_got, gc_miss, num_cursor, cost_cursor, cps_cursor, num_grandma, cost_grandma, cps_grandma, num_farm, cost_farm, cps_farm, num_mine, cost_mine, cps_mine, num_factory, cost_factory, cps_factory, num_bank, cost_bank, cps_bank, num_temple, cost_temple, cps_temple, num_wiz, cost_wiz, cps_wiz, num_ship, cost_ship, cps_ship, num_alc, cost_alc, cps_alc, num_port,cost_port, cps_port, num_tima, cost_tima, cps_tima, first_boot
+    global total_cookies, current_cookies, num_click, gc_got, gc_miss, start_time, num_cursor, cost_cursor, cps_cursor, num_grandma, cost_grandma, cps_grandma, num_farm, cost_farm, cps_farm, num_mine, cost_mine, cps_mine, num_factory, cost_factory, cps_factory, num_bank, cost_bank, cps_bank, num_temple, cost_temple, cps_temple, num_wiz, cost_wiz, cps_wiz, num_ship, cost_ship, cps_ship, num_alc, cost_alc, cps_alc, num_port,cost_port, cps_port, num_tima, cost_tima, cps_tima, first_boot, in_frenzy, in_click_frenzy
     try:
         with open(os.path.join(sys.path[0],"SaveData.txt"), "r") as save_file:
         
@@ -28,6 +27,9 @@ def load():
             # golden cookies
             gc_got = float(save_file.readline())
             gc_miss = float(save_file.readline())
+
+            # time
+            start_time = start_time.replace(year = int(save_file.readline()), month = int(save_file.readline()), day = int(save_file.readline()), hour = int(save_file.readline()), minute = int(save_file.readline()), second = int(save_file.readline()), microsecond = int(save_file.readline()))
 
             # buildings
             # cursor
@@ -81,13 +83,17 @@ def load():
         
             # booleans
             first_boot = int(save_file.readline())
+            in_frenzy = int(save_file.readline())
+            frenzy_end = frenzy_end.replace(year = int(save_file.readline()), month = int(save_file.readline()), day = int(save_file.readline()), hour = int(save_file.readline()), minute = int(save_file.readline()), second = int(save_file.readline()), microsecond = int(save_file.readline()))
+            in_click_frenzy = int(save_file.readline())
+            click_frenzy_end = click_frenzy_end.replace(year = int(save_file.readline()), month = int(save_file.readline()), day = int(save_file.readline()), hour = int(save_file.readline()), minute = int(save_file.readline()), second = int(save_file.readline()), microsecond = int(save_file.readline()))
 
             save_file.close()
     except:
         print("No save file detected. Creating new one...\n")
 
 def save():
-    global total_cookies, current_cookies, num_click, gc_got, gc_miss, num_cursor, cost_cursor, cps_cursor, num_grandma, cost_grandma, cps_grandma, num_farm, cost_farm, cps_farm, num_mine, cost_mine, cps_mine, num_factory, cost_factory, cps_factory, num_bank, cost_bank, cps_bank, num_temple, cost_temple, cps_temple, num_wiz, cost_wiz, cps_wiz, num_ship, cost_ship, cps_ship, num_alc, cost_alc, cps_alc, num_port,cost_port, cps_port, num_tima, cost_tima, cps_tima, first_boot
+    global total_cookies, current_cookies, num_click, gc_got, gc_miss, start_time, num_cursor, cost_cursor, cps_cursor, num_grandma, cost_grandma, cps_grandma, num_farm, cost_farm, cps_farm, num_mine, cost_mine, cps_mine, num_factory, cost_factory, cps_factory, num_bank, cost_bank, cps_bank, num_temple, cost_temple, cps_temple, num_wiz, cost_wiz, cps_wiz, num_ship, cost_ship, cps_ship, num_alc, cost_alc, cps_alc, num_port,cost_port, cps_port, num_tima, cost_tima, cps_tima, first_boot
     try:
         with open(os.path.join(sys.path[0],"SaveData.txt"), "w") as save_file:
             # cookies
@@ -98,6 +104,9 @@ def save():
 
             # golden cookies
             save_file.writelines("%s\n%s\n" % (str(gc_got), str(gc_miss)))
+
+            # time
+            save_file.writelines("%s\n%s\n%s\n%s\n%s\n%s\n%s\n" % (str(start_time.year), str(start_time.month), str(start_time.day), str(start_time.hour), str(start_time.minute), str(start_time.second), str(start_time.microsecond)))
 
             # buildings
             # cursor
@@ -127,6 +136,10 @@ def save():
 
             # booleans
             save_file.writelines(str(first_boot) + "\n")
+            save_file.writelines(str(in_frenzy) + "\n")
+            save_file.writelines("%s\n%s\n%s\n%s\n%s\n%s\n%s\n" % (str(frenzy_end.year), str(frenzy_end.month), str(frenzy_end.day), str(frenzy_end.hour), str(frenzy_end.minute), str(frenzy_end.second), str(frenzy_end.microsecond)))
+            save_file.writelines(str(in_click_frenzy) + "\n")
+            save_file.writelines("%s\n%s\n%s\n%s\n%s\n%s\n%s\n" % (str(click_frenzy_end.year), str(click_frenzy_end.month), str(click_frenzy_end.day), str(click_frenzy_end.hour), str(click_frenzy_end.minute), str(click_frenzy_end.second), str(click_frenzy_end.microsecond)))
 
             save_file.close()
 
@@ -201,13 +214,44 @@ def display_num2(num):
     
     return display_num
 
+def lucky():
+    global total_cookies, cps, current_cookies
+    print("~~Lucky!~~")
+    if (1.15 * (current_cookies + 13)) <= ((cps * 900) + 13):
+        total_cookies += (1.15 * (current_cookies + 13))
+        current_cookies += (1.15 * (current_cookies + 13))
+        print("+%d cookies\n" % int(1.15 * (current_cookies + 13)))
+    else:
+        total_cookies += ((cps * 900) + 13)
+        current_cookies += ((cps * 900) + 13)
+        print("+%d cookies\n" % int((cps * 900) + 13))
+
+def frenzy():
+    global in_frenzy, frenzy_time, frenzy_end
+    print("~~Frenzy~~\nClicks per second x7 for 77 seconds.\n")
+    in_frenzy = 1
+    frenzy_time = datetime.datetime.today()
+    frenzy_end = frenzy_time + datetime.timedelta(seconds = 77)
+
+def click_frenzy():
+    global in_click_frenzy, click_frenzy_time, click_frenzy_end
+    print("~~Click Frenzy~~\ncookies per second x777 for 13 seconds.\n")
+    in_click_frenzy = 1
+    click_frenzy_time = datetime.datetime.today()
+    click_frenzy_end = click_frenzy_time + datetime.timedelta(seconds = 13)
+
+def blab():
+    blab = ['Cookie crumbliness x3 for 60 seconds!', 'Chocolatiness x7 for 77 seconds!', 'Dough elasticity halved for 66 seconds!', 'Golden Cookie shininess doubled for 3 seconds!', 'World economy halved for 30 seconds!', 'Grandma kisses 23% stingier for 45 seconds!', 'Thanks for clicking!', 'Fooled you! This one was just a test.', 'Golden Cookies clicked +1!', 'Your click has been registered. Thank you for your cooperation.', 'Thanks! That hit the spot!', 'Thank you. A team has been dispatched.', 'They know.', 'Oops. This was just a chocolate cookie with shiny aluminium foil.', 'Mouse acceleration +0.03%!', 'All cookies multiplied by 999! All cookies divided by 999!', 'Gained 1 extra!', 'Chocolate chips reshuffled!', 'Ascension bonuses x5,000 for 0.1 seconds!', 'It seems you hallucinated that cookie.', 'Organs added.', 'Bones removed.', 'You saw nothing.', 'In theory there is no wrong way of clicking a golden cookie, but you did that, somehow.', 'Nice try, but no.', 'Randomized chance card outcome!', 'Huh? Oh, there was nothing there.', 'I felt that.', 'This golden cookie was a complete fabrication.', 'Eschaton immanentized!', 'Yippee!', 'Again.', 'Why?', "You've made a grave mistake.", 'Oh, that tickled!', "Wait, sorry, I wasn't ready yet.", 'Did you just click that?', 'Sorry, better luck next time!']
+    blab_num = random.randint(1, 38)
+    print(blab[blab_num] + "\n")
+
 def gc_spawn():
     global num_click, gc_got, gc_miss
 
     if num_click >= 300:
         if random.randint(300, 900) in range(300, num_click):
             num_click = 0
-            chance = 1
+            chance = 0
             while(chance < 3):
                 gc_char = chr(random.randint(97, 122))
                 chance += 1
@@ -215,11 +259,15 @@ def gc_spawn():
                     clear()
                     chance = 4
                     gc_got += 1
-                    effect_num = random.randint(1, 2)
-                    if effect_num == 1:
+                    effect_num = random.randint(1, 100)
+                    if effect_num in range(1, 47):
+                        lucky()
+                    elif effect_num in range(47, 93):
                         frenzy()
-                    elif effect_num == 2:
+                    elif effect_num in range(93, 100):
                         click_frenzy()
+                    elif effect_num == 100:
+                        blab()
                 else:
                     clear()
             if chance == 3:
@@ -227,114 +275,86 @@ def gc_spawn():
                 gc_miss +=1
                 print("You missed the Golden Cookie.\n")
 
-def frenzy():
-    global total_cookies, click_power, current_cookies
-    i = 0
-    while(i < 78):
-        print("~~Cookie Frenzy Active~~\n77 clicks of 7x cookie production (while active, can only click)\n")
-        user_input = input("[%s cookies] +%s cookies\nEnter command: " % (display_num(current_cookies), display_num2(click_power)))
-        if user_input == "":
-            clear()
-            total_cookies += click_power * 7
-            current_cookies += click_power * 7
-            i += 1
-        else:
-            clear()
-            print("~~Cookie Frenzy Canceled~~\n")
-            break
-
-def click_frenzy():
-    global total_cookies, click_power, current_cookies
-    i = 0
-    while(i < 14):
-        print("~~~Click Frenzy Active~~~\n13 clicks of 77x cookie production (while active, can only click)\n")
-        user_input = input("[%s cookies] +%s cookies\nEnter command: " % (display_num(current_cookies), display_num2(click_power)))
-        if user_input == "":
-            clear()
-            total_cookies += click_power * 77
-            current_cookies += click_power * 77
-            i += 1
-        else:
-            clear()
-            print("~~Click Frenzy Canceled~~\n")
-            break
-
 def shop(type):
     global in_shop, num_cursor, cost_cursor, num_grandma, cost_grandma, num_farm, cost_farm, num_mine, cost_mine, num_factory, cost_factory, num_bank, cost_bank, num_temple, cost_temple, num_wiz, cost_wiz, num_ship, cost_ship, num_alc, cost_alc, num_port, cost_port, num_tima, cost_tima
     type = type.lower()
 
-    if type == "cursor" or type == "1":
-        type = "cursor"
-        num_cursor, cost_cursor = (purchase(type, num_cursor, cost_cursor, 15, input("\tAmount: ")))
-    elif type == "grandma" or type == "2":
-        type = "grandma"
-        num_grandma, cost_grandma = (purchase(type, num_grandma, cost_grandma, 100, input("\tAmount: ")))
-    elif (type == "farm" or type == "3") and num_grandma > 0:
-        type = "farm"
-        num_farm, cost_farm = (purchase(type, num_farm, cost_farm, 1100, input("\tAmount: ")))
-    elif (type == "mine" or type == "4") and num_farm > 0:
-        type = "mine"
-        num_mine, cost_mine = (purchase(type, num_mine, cost_mine, 12000, input("\tAmount: ")))
-    elif (type == "factory" or type == "5") and num_mine > 0:
-        type = "factory"
-        num_factory, cost_factory = (purchase(type, num_factory, cost_factory, 130000, input("\tAmount: ")))
-    elif (type == "bank" or type == "6") and num_factory > 0:
-        type = "bank"
-        num_bank, cost_bank = (purchase(type, num_bank, cost_bank, 1400000, input("\tAmount: ")))
-    elif (type == "temple" or type == "7") and num_bank > 0:
-        type = "temple"
-        num_temple, cost_temple = (purchase(type, num_temple, cost_temple, 20000000, input("\tAmount: ")))
-    elif (type == "wizard tower" or type == "8") and num_temple > 0:
-        type = "wizard tower"
-        num_wiz, cost_wiz = (purchase(type, num_wiz, cost_wiz, 330000000, input("\tAmount: ")))
-    elif (type == "shipment" or type == "9") and num_wiz > 0:
-        type = "shipment"
-        num_ship, cost_ship = (purchase(type, num_ship, cost_ship, 5100000000, input("\tAmount: ")))
-    elif (type == "alchemy lab" or type == "10") and num_ship > 0:
-        type = "alchemy lab"
-        num_alc, cost_alc = (purchase(type, num_alc, cost_alc, 75000000000, input("\tAmount: ")))
-    elif (type == "portal" or type == "11") and num_alc > 0:
-        type = "portal"
-        num_port, cost_port = (purchase(type, num_port, cost_port, 1000000000000, input("\tAmount: ")))
-    elif (type == "time machine" or type == "12") and num_port > 0:
-        type = "time machine"
-        num_tima, cost_tima = (purchase(type, num_tima, cost_tima, 14000000000000, input("\tAmount: ")))
+    try:
+        if type == "cursor" or type == "1":
+            type = "cursor"
+            num_cursor, cost_cursor = (purchase(type, num_cursor, cost_cursor, 15, input("\tAmount: ")))
+        elif type == "grandma" or type == "2":
+            type = "grandma"
+            num_grandma, cost_grandma = (purchase(type, num_grandma, cost_grandma, 100, input("\tAmount: ")))
+        elif (type == "farm" or type == "3") and num_grandma > 0:
+            type = "farm"
+            num_farm, cost_farm = (purchase(type, num_farm, cost_farm, 1100, input("\tAmount: ")))
+        elif (type == "mine" or type == "4") and num_farm > 0:
+            type = "mine"
+            num_mine, cost_mine = (purchase(type, num_mine, cost_mine, 12000, input("\tAmount: ")))
+        elif (type == "factory" or type == "5") and num_mine > 0:
+            type = "factory"
+            num_factory, cost_factory = (purchase(type, num_factory, cost_factory, 130000, input("\tAmount: ")))
+        elif (type == "bank" or type == "6") and num_factory > 0:
+            type = "bank"
+            num_bank, cost_bank = (purchase(type, num_bank, cost_bank, 1400000, input("\tAmount: ")))
+        elif (type == "temple" or type == "7") and num_bank > 0:
+            type = "temple"
+            num_temple, cost_temple = (purchase(type, num_temple, cost_temple, 20000000, input("\tAmount: ")))
+        elif (type == "wizard tower" or type == "8") and num_temple > 0:
+            type = "wizard tower"
+            num_wiz, cost_wiz = (purchase(type, num_wiz, cost_wiz, 330000000, input("\tAmount: ")))
+        elif (type == "shipment" or type == "9") and num_wiz > 0:
+            type = "shipment"
+            num_ship, cost_ship = (purchase(type, num_ship, cost_ship, 5100000000, input("\tAmount: ")))
+        elif (type == "alchemy lab" or type == "10") and num_ship > 0:
+            type = "alchemy lab"
+            num_alc, cost_alc = (purchase(type, num_alc, cost_alc, 75000000000, input("\tAmount: ")))
+        elif (type == "portal" or type == "11") and num_alc > 0:
+            type = "portal"
+            num_port, cost_port = (purchase(type, num_port, cost_port, 1000000000000, input("\tAmount: ")))
+        elif (type == "time machine" or type == "12") and num_port > 0:
+            type = "time machine"
+            num_tima, cost_tima = (purchase(type, num_tima, cost_tima, 14000000000000, input("\tAmount: ")))
     
-    elif "desc" in type:
-        clear()
-        if type == "desc.cursor" or type == "desc.1":
-            print("[Cursor] --> Clicks cookies alongside you. Who controls them...?; increases clicks per click by 0.1")
-        elif type == "desc.grandma" or type == "desc.2":
-            print("[Grandma] --> Bakes for you. How nice!; increases clicks per click by 1")
-        elif (type == "desc.farm" or type == "desc.3") and num_grandma > 0:
-            print("[Farm] --> Grows cookies for harvesting. Don't think about it too hard; increases clicks per click by 8")
-        elif (type == "desc.mine" or type == "desc.4") and num_farm > 0:
-            print("[Mine] --> Extracts the natural cookies of the Earth. What, you didn't know about that?; increases clicks per click by 47")
-        elif (type == "desc.factory" or type == "desc.5") and num_mine > 0:
-            print("[Factory] --> Mass-produces cookies on a global scale. It's not a monopoly, it's business; increases clicks per click by 260")
-        elif (type == "desc.bank" or type == "desc.6") and num_factory > 0:
-            print("[Bank] --> Take out a copious number of cookie loans. Bad credit?\n\nWell i was shopping for a new car which ones me?\nA cool convertible or an SUV\nToo bad i didn't know my credit was whack and now I'm driving off the lot in a used sub-compact\nF-R-E-E that spells free. creditreport.com baby\nSaw their ads on my TV, thought about going but was too lazy\nNow instead of looking fly and rolling fat My legs are sticking to the vinyl and my posses getting laughed at!\nF-R-E-E that spell free. creditreport.com baby!;\n\nincreases clicks per click by 1.4K")
-        elif (type == "desc.temple" or type == "desc.7") and num_bank > 0:
-            print("[Temple] --> Pray to the Cookie Gods, I'm sure they'll love you; increases clicks per click by 7.8K")
-        elif (type == "desc.wizard tower" or type == "desc.8") and num_temple > 0:
-            print("[Wizard Tower] --> Enlist the help of Cookie Wizards throughout the world; increases clicks per click by 44K")
-        elif (type == "desc.shipment" or type == "desc.9") and num_wiz > 0:
-            print("[Shipment] --> Order shipments of cookies from far off planets. Did someone order a package?; increases clicks per click by 260K")
-        elif (type == "desc.alchemy lab" or type == "desc.10") and num_ship > 0:
-            print("[Alchemy Lab] --> Synthesize cookies to your heart's content. Are we breaking any natural laws here?; increases clicks per click by 1.6M")
-        elif (type == "desc.portal" or type == "desc.11") and num_alc > 0:
-            print("[Portal] --> Open a portal to the Cookie Dimension. Shovel as many cookies as you can before the spacetime-continuum collapses; increases clicks per click by 10M")
-        elif (type == "desc.time machine" or type == "desc.12") and num_port > 0:
-            print("[Time Machine] --> Travel back in time and steal the cookies yet to be baked. Try not to make out with your mom; increases clicks per click by 65M")
+        elif "desc" in type:
+            clear()
+            if type == "desc.cursor" or type == "desc.1":
+                print("[Cursor] --> Clicks cookies alongside you. Who controls them...?; increases cookies per second by 0.1")
+            elif type == "desc.grandma" or type == "desc.2":
+                print("[Grandma] --> Bakes for you. How nice!; increases cookies per second by 1")
+            elif (type == "desc.farm" or type == "desc.3") and num_grandma > 0:
+                print("[Farm] --> Grows cookies for harvesting. Don't think about it too hard; increases cookies per second by 8")
+            elif (type == "desc.mine" or type == "desc.4") and num_farm > 0:
+                print("[Mine] --> Extracts the natural cookies of the Earth. What, you didn't know about that?; increases cookies per second by 47")
+            elif (type == "desc.factory" or type == "desc.5") and num_mine > 0:
+                print("[Factory] --> Mass-produces cookies on a global scale. It's not a monopoly, it's business; increases cookies per second by 260")
+            elif (type == "desc.bank" or type == "desc.6") and num_factory > 0:
+                print("[Bank] --> Take out a copious number of cookie loans. Bad credit?\n\nWell i was shopping for a new car which ones me?\nA cool convertible or an SUV\nToo bad i didn't know my credit was whack and now I'm driving off the lot in a used sub-compact\nF-R-E-E that spells free. creditreport.com baby\nSaw their ads on my TV, thought about going but was too lazy\nNow instead of looking fly and rolling fat My legs are sticking to the vinyl and my posses getting laughed at!\nF-R-E-E that spell free. creditreport.com baby!;\n\nincreases cookies per second by 1.4K")
+            elif (type == "desc.temple" or type == "desc.7") and num_bank > 0:
+                print("[Temple] --> Pray to the Cookie Gods, I'm sure they'll love you; increases cookies per second by 7.8K")
+            elif (type == "desc.wizard tower" or type == "desc.8") and num_temple > 0:
+                print("[Wizard Tower] --> Enlist the help of Cookie Wizards throughout the world; increases cookies per second by 44K")
+            elif (type == "desc.shipment" or type == "desc.9") and num_wiz > 0:
+                print("[Shipment] --> Order shipments of cookies from far off planets. Did someone order a package?; increases cookies per second by 260K")
+            elif (type == "desc.alchemy lab" or type == "desc.10") and num_ship > 0:
+                print("[Alchemy Lab] --> Synthesize cookies to your heart's content. Are we breaking any natural laws here?; increases cookies per second by 1.6M")
+            elif (type == "desc.portal" or type == "desc.11") and num_alc > 0:
+                print("[Portal] --> Open a portal to the Cookie Dimension. Shovel as many cookies as you can before the spacetime-continuum collapses; increases cookies per second by 10M")
+            elif (type == "desc.time machine" or type == "desc.12") and num_port > 0:
+                print("[Time Machine] --> Travel back in time and steal the cookies yet to be baked. Try not to make out with your mom; increases cookies per second by 65M")
+            else:
+                print("Input not recognized or building not unlocked")
+            print("")
+
+        elif type == "/e" or type == "exit":
+            clear()
+            in_shop = False
+
         else:
-            print("Input not recognized or building not unlocked")
-        print("")
-
-    elif type == "/e" or type == "exit":
-        clear()
-        in_shop = False
-
-    else:
+            clear()
+            print("Input error\n")
+    except:
         clear()
         print("Input error\n")
 
@@ -369,6 +389,7 @@ def purchase(building, num_build, cost_build, initial_cost, amount):
 total_cookies = 0
 current_cookies = 0
 # clicks
+cpc = 1
 num_click = 0
 # golden cookies
 gc_got = 0
@@ -428,7 +449,15 @@ cps_tima = 65000000
 in_shop = False
 dev_mode = False
 first_boot = 1
+in_frenzy = 0
+in_click_frenzy = 0
 
+# time
+start_time = datetime.datetime.today()
+end_time = datetime.datetime.today()
+
+frenzy_end = datetime.date.today()
+click_frenzy_end = datetime.datetime.today()
 
 # load save
 load()
@@ -440,19 +469,37 @@ if first_boot == 1:
 else:
     print("Welcome back to Python Clicker!\nType '/h' or 'help' for list of commands.\n")
 
+# main loop
 while(True):
-    # Click_power calculation
-    click_power = 1 + cps_cursor*num_cursor + cps_grandma*num_grandma + cps_farm*num_farm + cps_mine*num_mine + cps_factory*num_factory + cps_bank*num_bank + cps_temple*num_temple + cps_wiz*num_wiz + cps_ship*num_ship + cps_alc*num_alc + cps_port*num_port + cps_tima*num_tima
-
+    # cps calculation
+    cps = cps_cursor*num_cursor + cps_grandma*num_grandma + cps_farm*num_farm + cps_mine*num_mine + cps_factory*num_factory + cps_bank*num_bank + cps_temple*num_temple + cps_wiz*num_wiz + cps_ship*num_ship + cps_alc*num_alc + cps_port*num_port + cps_tima*num_tima
+    
     # input
-    user_input = input("[%s cookies] +%s cookies\nEnter command: " % (display_num(current_cookies), display_num2(click_power))).lower()
+    user_input = input("[%s cookies] +%s cookies per second\nEnter command: " % (display_num(current_cookies), display_num2(cps))).lower()
 
     # click
     if user_input == "":
         clear()
-        total_cookies += click_power
-        current_cookies += click_power
+        
+        # update time value
+        end_time = datetime.datetime.today()
+        
+        # during frenzy
+        if in_frenzy == 1 and end_time < frenzy_end:
+            total_cookies += (abs(end_time.second - start_time.second) * (cps * 7)) + cpc * 7
+            current_cookies += (abs(end_time.second - start_time.second) * (cps * 7)) + cpc * 7
+        
+        # during click frenzy
+        elif in_click_frenzy == 1 and end_time < click_frenzy_end:
+            total_cookies += (abs(end_time.second - start_time.second) * (cps * 777)) + cpc * 777
+            current_cookies += (abs(end_time.second - start_time.second) * (cps * 777)) + cpc * 777
+        
+        # normal click
+        else:
+            total_cookies += (abs(end_time.second - start_time.second) * (cps)) + cpc
+            current_cookies += (abs(end_time.second - start_time.second) * (cps)) + cpc
         num_click += 1
+        start_time = datetime.datetime.today()
         gc_spawn()
 
     # help
@@ -463,9 +510,21 @@ while(True):
         '/s' or 'shop' - Enter shop
         '/st' or 'stats' - View statistics
         '/h' or 'help' - View List of Commands
+        '/a' or 'about' - View About Page
         '/sf' or 'save' - Manual Save
         '/d' or 'delete' - Delete save file
         '/e' or 'exit' - Quit game
+        """)
+
+    # about
+    elif user_input == "/a" or user_input == "about":
+        clear()
+        print("""About Python Clicker:
+
+    Python Clicker is a limited text terminal remake of the hit game Cookie Clicker within the Python coding language.
+        
+    As everything runs within the terminal, values only update once an action is preformed. 
+    I assure you, however, that cookie production is calculated based on the passage of real world time.
         """)
 
     # stats
@@ -473,7 +532,7 @@ while(True):
         clear()
         print("""You have cooked %s total cookies.
 You currently have %s cookies.
-click_power = %s
+cps = %s
 num_click = %s
 gc_got = %s
 gc_miss = %s
@@ -489,7 +548,7 @@ num_ship = %d
 num_alc = %d
 num_port = %d
 num_tima = %d
-""" % (display_num2(total_cookies), display_num2(current_cookies), display_num2(click_power), num_click, gc_got, gc_miss, num_cursor, num_grandma, num_farm, num_mine, num_factory, num_bank, num_temple, num_wiz, num_ship, num_alc, num_port, num_tima))
+""" % (display_num2(total_cookies), display_num2(current_cookies), display_num2(cps), num_click, gc_got, gc_miss, num_cursor, num_grandma, num_farm, num_mine, num_factory, num_bank, num_temple, num_wiz, num_ship, num_alc, num_port, num_tima))
     
     # enter shop
     elif user_input == "/s" or user_input == "shop":

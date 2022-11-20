@@ -1,0 +1,5 @@
+***Patch Notes***
+- Upgrades no longer increase click per click value, now increasing cookies per second (calculated using system clock)
+- Added 'Lucky!' and 'Blab' effects as possible Golden Cookie outcomes
+- Added 'about' command
+- General implementation of real world time into the game
