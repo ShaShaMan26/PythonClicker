@@ -13,7 +13,7 @@ import random, time, os, sys, datetime
 
 # load save function
 def load():
-    global total_cookies, current_cookies, num_click, gc_got, gc_miss, start_time, num_cursor, cost_cursor, cps_cursor, num_grandma, cost_grandma, cps_grandma, num_farm, cost_farm, cps_farm, num_mine, cost_mine, cps_mine, num_factory, cost_factory, cps_factory, num_bank, cost_bank, cps_bank, num_temple, cost_temple, cps_temple, num_wiz, cost_wiz, cps_wiz, num_ship, cost_ship, cps_ship, num_alc, cost_alc, cps_alc, num_port,cost_port, cps_port, num_tima, cost_tima, cps_tima, first_boot, in_frenzy, in_click_frenzy
+    global total_cookies, current_cookies, num_click, gc_got, gc_miss, start_time, num_cursor, cost_cursor, cps_cursor, num_grandma, cost_grandma, cps_grandma, num_farm, cost_farm, cps_farm, num_mine, cost_mine, cps_mine, num_factory, cost_factory, cps_factory, num_bank, cost_bank, cps_bank, num_temple, cost_temple, cps_temple, num_wiz, cost_wiz, cps_wiz, num_ship, cost_ship, cps_ship, num_alc, cost_alc, cps_alc, num_port,cost_port, cps_port, num_tima, cost_tima, cps_tima, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
     try:
         with open(os.path.join(sys.path[0],"SaveData.txt"), "r") as save_file:
         
@@ -93,7 +93,7 @@ def load():
         print("No save file detected. Creating new one...\n")
 
 def save():
-    global total_cookies, current_cookies, num_click, gc_got, gc_miss, start_time, num_cursor, cost_cursor, cps_cursor, num_grandma, cost_grandma, cps_grandma, num_farm, cost_farm, cps_farm, num_mine, cost_mine, cps_mine, num_factory, cost_factory, cps_factory, num_bank, cost_bank, cps_bank, num_temple, cost_temple, cps_temple, num_wiz, cost_wiz, cps_wiz, num_ship, cost_ship, cps_ship, num_alc, cost_alc, cps_alc, num_port,cost_port, cps_port, num_tima, cost_tima, cps_tima, first_boot
+    global total_cookies, current_cookies, num_click, gc_got, gc_miss, start_time, num_cursor, cost_cursor, cps_cursor, num_grandma, cost_grandma, cps_grandma, num_farm, cost_farm, cps_farm, num_mine, cost_mine, cps_mine, num_factory, cost_factory, cps_factory, num_bank, cost_bank, cps_bank, num_temple, cost_temple, cps_temple, num_wiz, cost_wiz, cps_wiz, num_ship, cost_ship, cps_ship, num_alc, cost_alc, cps_alc, num_port,cost_port, cps_port, num_tima, cost_tima, cps_tima, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
     try:
         with open(os.path.join(sys.path[0],"SaveData.txt"), "w") as save_file:
             # cookies
@@ -456,7 +456,7 @@ in_click_frenzy = 0
 start_time = datetime.datetime.today()
 end_time = datetime.datetime.today()
 
-frenzy_end = datetime.date.today()
+frenzy_end = datetime.datetime.today()
 click_frenzy_end = datetime.datetime.today()
 
 # load save
