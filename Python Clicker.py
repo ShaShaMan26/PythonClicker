@@ -181,11 +181,20 @@ def display_num(num):
     if num < 1000:
         display_num = num
     elif (len(str(num)) - 1) % 3 == 0:
-        display_num = "%s.%s%s" % (str(num)[0], str(num)[1], end)
+        if str(num)[1] != "0":
+            display_num = "%s.%s%s" % (str(num)[0], str(num)[1], end)
+        else:
+            display_num = "%s%s" % (str(num)[0], end)
     elif (len(str(num)) - 2) % 3 == 0:
-        display_num = "%s.%s%s" % (str(num)[0] + str(num)[1], str(num)[2], end)
+        if str(num)[2] != "0":
+            display_num = "%s.%s%s" % (str(num)[0] + str(num)[1], str(num)[2], end)
+        else:
+            display_num = "%s%s" % (str(num)[0] + str(num)[1], end)
     elif (len(str(num)) - 3) % 3 == 0:
-        display_num = "%s.%s%s" % (str(num)[0] + str(num)[1] + str(num)[2], str(num)[3], end)
+        if str(num)[3] != "0":
+            display_num = "%s.%s%s" % (str(num)[0] + str(num)[1] + str(num)[2], str(num)[3], end)
+        else:
+            display_num = "%s%s" % (str(num)[0] + str(num)[1] + str(num)[2], end)
     else:
         display_num = int(num)
     
@@ -220,11 +229,11 @@ def lucky():
     if (1.15 * (current_cookies + 13)) <= ((cps * 900) + 13):
         total_cookies += (1.15 * (current_cookies + 13))
         current_cookies += (1.15 * (current_cookies + 13))
-        print("+%d cookies\n" % int(1.15 * (current_cookies + 13)))
+        print("+%s cookies\n" % display_num2(1.15 * (current_cookies + 13)))
     else:
         total_cookies += ((cps * 900) + 13)
         current_cookies += ((cps * 900) + 13)
-        print("+%d cookies\n" % int((cps * 900) + 13))
+        print("+%s cookies\n" % display_num2((cps * 900) + 13))
 
 def frenzy():
     global in_frenzy, frenzy_time, frenzy_end
@@ -360,7 +369,7 @@ def shop(type):
 
 def purchase(building, num_build, cost_build, initial_cost, amount):
     global current_cookies
-    if amount.lower() == "max":
+    if amount.lower() == "max" or amount.lower() == "m":
         clear()
         while(current_cookies >= cost_build):
             current_cookies -= float(cost_build)
@@ -486,18 +495,18 @@ while(True):
         
         # during frenzy
         if in_frenzy == 1 and end_time < frenzy_end:
-            total_cookies += (abs(end_time.second - start_time.second) * (cps * 7)) + cpc * 7
-            current_cookies += (abs(end_time.second - start_time.second) * (cps * 7)) + cpc * 7
+            total_cookies += ((end_time - start_time).total_seconds() * (cps * 7)) + cpc * 7
+            current_cookies += ((end_time - start_time).total_seconds() * (cps * 7)) + cpc * 7
         
         # during click frenzy
         elif in_click_frenzy == 1 and end_time < click_frenzy_end:
-            total_cookies += (abs(end_time.second - start_time.second) * (cps * 777)) + cpc * 777
-            current_cookies += (abs(end_time.second - start_time.second) * (cps * 777)) + cpc * 777
+            total_cookies += ((end_time - start_time).total_seconds() * (cps * 777)) + cpc * 777
+            current_cookies += ((end_time - start_time).total_seconds() * (cps * 777)) + cpc * 777
         
         # normal click
         else:
-            total_cookies += (abs(end_time.second - start_time.second) * (cps)) + cpc
-            current_cookies += (abs(end_time.second - start_time.second) * (cps)) + cpc
+            total_cookies += ((end_time - start_time).total_seconds() * (cps)) + cpc
+            current_cookies += ((end_time - start_time).total_seconds() * (cps)) + cpc
         num_click += 1
         start_time = datetime.datetime.today()
         gc_spawn()
