@@ -750,14 +750,14 @@ num_CB = %d
             print("\n~~Upgrades~~")
             if num_RIF < 1:
                 if num_C >= 1:
-                    print("[u1] Reinforced index finger --> [%s cookies]" % display_num(cost_RIF))
+                    print("[u1] Reinforced Index Finger --> [%s cookies]" % display_num(cost_RIF))
                 else:
                     print("[u1] ?????????? ????? ?????? --> [??? cookies]")
             else:
                 print("Upgrade Purchased")
             if num_CTPC < 1:
                 if num_C >= 1:
-                    print("[u2] Carpal tunnel prevention cream --> [%s cookies]" % display_num(cost_CTPC))
+                    print("[u2] Carpal Tunnel Prevention Cream --> [%s cookies]" % display_num(cost_CTPC))
                 else:
                     print("[u2] ?????? ?????? ?????????? ????? --> [??? cookies]")
             else:
@@ -771,7 +771,7 @@ num_CB = %d
                 print("Upgrade Purchased")
             if num_TF < 1:
                 if num_C >= 25:
-                    print("[u4] Thousand fingers --> [%s cookies]" % display_num(cost_TF))
+                    print("[u4] Thousand Fingers --> [%s cookies]" % display_num(cost_TF))
                 else:
                     print("[u4] ???????? ??????? --> [??? cookies]")
             else:
