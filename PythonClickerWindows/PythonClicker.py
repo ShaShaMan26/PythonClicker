@@ -430,7 +430,15 @@ def shop(type):
     
         elif "desc" in type:
             clear()
-            if type == "desc.cursor" or type == "desc.1":
+            if type == "desc.reinforced index finger" or type == "desc.u1":
+                print("[Reinforced Index Finger] --> Reinforces fingers for optimized clicking, German Science is the finest in the world!; clicks are twice as efficient.")
+            elif type == "desc.carpal tunnel prevention cream" or type == "desc.u2":
+                print("[Carpal Tunnel Prevention Cream] --> Delays the inevitable deterioration of your mortal form. All that for a cookie?; clicks are twice as efficient.")
+            elif type == "desc.ambidextrous" or type == "desc.u3":
+                print("[Ambidextrous] --> Learn the power of using two hands; clicks are twice as efficient.")
+            elif type == "desc.thousand fingers" or type == "desc.u4":
+                print("[Thousand Fingers] --> Raise and army of fingers to click along side you; click power +0.1 for each non-cursor building owned.")
+            elif type == "desc.cursor" or type == "desc.1":
                 print("[Cursor] --> Clicks cookies alongside you. Who controls them...?; increases cookies per second by 0.1")
             elif type == "desc.grandma" or type == "desc.2":
                 print("[Grandma] --> Bakes for you. How nice!; increases cookies per second by 1")
@@ -454,6 +462,20 @@ def shop(type):
                 print("[Portal] --> Open a portal to the Cookie Dimension. Shovel as many cookies as you can before the spacetime-continuum collapses; increases cookies per second by 10M")
             elif (type == "desc.time machine" or type == "desc.12") and num_Po > 0:
                 print("[Time Machine] --> Travel back in time and steal the cookies yet to be baked. Try not to make out with your mom; increases cookies per second by 65M")
+            elif (type == "desc.antimatter condenser" or type == "desc.13") and num_TM > 0:
+                print("[Antimatter Condenser] --> Condenses the universe's antimatter into cookies. Nifty!; increases cookies per second by 430M")
+            elif (type == "desc.prism" or type == "desc.14") and num_AC > 0:
+                print("[Prism] --> Converts light into cookies. Wonder if it came from The Dark Side of the Moon...; increases cookies per second by 2.9B")
+            elif (type == "desc.chancemaker" or type == "desc.15") and num_Pr > 0:
+                print("[Chancemaker] --> Mechanize the power of four-leaf clovers, spontaneously generating cookies for you; increases cookies per second by 21B")
+            elif (type == "desc.fractal engine" or type == "desc.16") and num_Ch > 0:
+                print("[Fractal Engine] --> Fractal generation of cookies. Cookies out of cookies out of cookies...; increases cookies per second by 150B")
+            elif (type == "desc.python console" or type == "desc.17") and num_FE > 0:
+                print("[Python Console] --> Hack into the mainframe and create cookies from the code itself; increases cookies per second by 1.1t")
+            elif (type == "desc.idleverse" or type == "desc.18") and num_PC > 0:
+                print("[Idleverse] --> Hijack the production of cookies from other idle universes; increases cookies per second by 8.3t")
+            elif (type == "desc.cortex baker" or type == "desc.19") and num_Iv > 0:
+                print("[Cortex Baker] --> Dream cookies into existence. Chrome up kid; increases cookies per second by 64t")
             else:
                 print("Input not recognized or building not unlocked")
             print("")
@@ -694,6 +716,7 @@ while(True):
         print("""You have cooked %s total cookies.
 You currently have %s cookies.
 cps = %s
+cpc = %s
 gc_st = %s
 gc_got = %s
 gc_miss = %s
@@ -716,14 +739,14 @@ num_FE = %d
 num_PC = %d
 num_Iv = %d
 num_CB = %d
-""" % (display_num2(total_cookies), display_num2(current_cookies), display_num2(cps), gc_st, gc_got, gc_miss, num_C, num_G, num_Fr, num_M, num_Fc, num_B, num_T, num_W, num_S, num_AL, num_Po, num_TM, num_AC, num_Pr, num_Ch, num_FE, num_PC, num_Iv, num_CB))
+""" % (display_num2(total_cookies), display_num2(current_cookies), display_num2(cps), display_num2(cpc), gc_st, gc_got, gc_miss, num_C, num_G, num_Fr, num_M, num_Fc, num_B, num_T, num_W, num_S, num_AL, num_Po, num_TM, num_AC, num_Pr, num_Ch, num_FE, num_PC, num_Iv, num_CB))
     
     # enter shop
     elif user_input == "/s" or user_input == "shop":
         clear()
         in_shop = True
         while(in_shop):
-            print("Enter building name or type 'desc.BUILDING NAME' or type 'exit'")
+            print("Enter item name or index to purchase, type 'desc.ITEM NAME/INDEX' for information, or type 'exit' to leave shop")
             print("\n~~Upgrades~~")
             if num_RIF < 1:
                 if num_C >= 1:
