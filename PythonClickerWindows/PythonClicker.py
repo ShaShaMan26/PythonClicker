@@ -3,7 +3,7 @@
 '''
 Python Clicker
 
-Small-scale Python terminal remake of Cookie Clicker made by Cristiano Porretta for Python I final project.
+Small-scale Python terminal remake of Cookie Clicker made by Cristiano Porretta as a Python I final project.
 
 Original source: https://github.com/ShaShaMan26/PythonClicker
 '''
@@ -13,7 +13,7 @@ import random, time, os, sys, datetime
 
 # load save function
 def load():
-    global total_cookies, current_cookies, num_click, gc_got, gc_miss, start_time, num_cursor, cost_cursor, cps_cursor, num_grandma, cost_grandma, cps_grandma, num_farm, cost_farm, cps_farm, num_mine, cost_mine, cps_mine, num_factory, cost_factory, cps_factory, num_bank, cost_bank, cps_bank, num_temple, cost_temple, cps_temple, num_wiz, cost_wiz, cps_wiz, num_ship, cost_ship, cps_ship, num_alc, cost_alc, cps_alc, num_port,cost_port, cps_port, num_tima, cost_tima, cps_tima, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
+    global total_cookies, current_cookies, gc_st, gc_got, gc_miss, start_time, num_C, num_RIF, cost_RIF, num_CTPC, cost_CTPC, num_A, cost_A, num_TF, cost_TF, cost_C, cps_C, num_G, cost_G, cps_G, num_Fr, cost_Fr, cps_Fr, num_M, cost_M, cps_M, num_Fc, cost_Fc, cps_Fc, num_B, cost_B, cps_B, num_T, cost_T, cps_T, num_W, cost_W, cps_W, num_S, cost_S, cps_S, num_AL, cost_AL, cps_AL, num_Po,cost_Po, cps_Po, num_TM, cost_TM, cps_TM, num_AC, cost_AC, cps_AC, num_Pr, cost_Pr, cps_Pr, num_Ch, cost_Ch, cps_Ch, num_FE, cost_FE, cps_FE, num_PC, cost_PC, cps_PC, num_Iv, cost_Iv, cps_Iv, num_CB, cost_CB, cps_CB, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
     try:
         with open(os.path.join(sys.path[0],"SaveData.txt"), "r") as save_file:
         
@@ -22,7 +22,7 @@ def load():
             current_cookies = float(save_file.readline())
 
             # clicks
-            num_click = int(save_file.readline())
+            gc_st = float(save_file.readline())
 
             # golden cookies
             gc_got = float(save_file.readline())
@@ -30,59 +30,102 @@ def load():
 
             # time
             start_time = start_time.replace(year = int(save_file.readline()), month = int(save_file.readline()), day = int(save_file.readline()), hour = int(save_file.readline()), minute = int(save_file.readline()), second = int(save_file.readline()), microsecond = int(save_file.readline()))
-
-            # buildings
+            
+            # upgrades
+            # reinforced index finger
+            num_RIF = int(save_file.readline())
+            cost_RIF = int(save_file.readline())
+            # carpal tunnel prevention
+            num_CTPC = int(save_file.readline())
+            cost_CTPC = int(save_file.readline())
+            # ambidextrous
+            num_A = int(save_file.readline())
+            cost_A = int(save_file.readline())         
+            # thousand fingers
+            num_TF = int(save_file.readline())
+            cost_TF = int(save_file.readline())
+            
+            # buildings (var names made to match that of Cookie Clicker)
             # cursor
-            num_cursor = float(save_file.readline())
-            cost_cursor = float(save_file.readline())
-            cps_cursor = float(save_file.readline())
+            num_C = float(save_file.readline())
+            cost_C = float(save_file.readline())
+            cps_C = float(save_file.readline())
             # grandma
-            num_grandma = float(save_file.readline())
-            cost_grandma = float(save_file.readline())
-            cps_grandma = float(save_file.readline())
+            num_G = float(save_file.readline())
+            cost_G = float(save_file.readline())
+            cps_G = float(save_file.readline())
             # farm
-            num_farm = float(save_file.readline())
-            cost_farm = float(save_file.readline())
-            cps_farm = float(save_file.readline())
+            num_Fr = float(save_file.readline())
+            cost_Fr = float(save_file.readline())
+            cps_Fr = float(save_file.readline())
             # mine
-            num_mine = float(save_file.readline())
-            cost_mine = float(save_file.readline())
-            cps_mine = float(save_file.readline())
+            num_M = float(save_file.readline())
+            cost_M = float(save_file.readline())
+            cps_M = float(save_file.readline())
             # factory
-            num_factory = float(save_file.readline())
-            cost_factory = float(save_file.readline())
-            cps_factory = float(save_file.readline())
+            num_Fc = float(save_file.readline())
+            cost_Fc = float(save_file.readline())
+            cps_Fc = float(save_file.readline())
             # bank
-            num_bank = float(save_file.readline())
-            cost_bank = float(save_file.readline())
-            cps_bank = float(save_file.readline())
+            num_B = float(save_file.readline())
+            cost_B = float(save_file.readline())
+            cps_B = float(save_file.readline())
             # temple
-            num_temple = float(save_file.readline())
-            cost_temple = float(save_file.readline())
-            cps_temple = float(save_file.readline())
+            num_T = float(save_file.readline())
+            cost_T = float(save_file.readline())
+            cps_T = float(save_file.readline())
             # wizard tower
-            num_wiz = float(save_file.readline())
-            cost_wiz = float(save_file.readline())
-            cps_wiz = float(save_file.readline())
+            num_W = float(save_file.readline())
+            cost_W = float(save_file.readline())
+            cps_W = float(save_file.readline())
             # shipment
-            num_ship = float(save_file.readline())
-            cost_ship = float(save_file.readline())
-            cps_ship = float(save_file.readline())
+            num_S = float(save_file.readline())
+            cost_S = float(save_file.readline())
+            cps_S = float(save_file.readline())
             # alchemy lab
-            num_alc = float(save_file.readline())
-            cost_alc = float(save_file.readline())
-            cps_alc = float(save_file.readline())
+            num_AL = float(save_file.readline())
+            cost_AL = float(save_file.readline())
+            cps_AL = float(save_file.readline())
             # portal
-            num_port = float(save_file.readline())
-            cost_port = float(save_file.readline())
-            cps_port = float(save_file.readline())
+            num_Po = float(save_file.readline())
+            cost_Po = float(save_file.readline())
+            cps_Po = float(save_file.readline())
             # time machine
-            num_tima = float(save_file.readline())
-            cost_tima = float(save_file.readline())
-            cps_tima = float(save_file.readline())
+            num_TM = float(save_file.readline())
+            cost_TM = float(save_file.readline())
+            cps_TM = float(save_file.readline())
+            # antimatter condenser
+            num_AC = float(save_file.readline())
+            cost_AC = float(save_file.readline())
+            cps_AC = float(save_file.readline())
+            # prism
+            num_Pr = float(save_file.readline())
+            cost_Pr = float(save_file.readline())
+            cps_Pr = float(save_file.readline())
+            # chancemaker
+            num_Ch = float(save_file.readline())
+            cost_Ch = float(save_file.readline())
+            cps_Ch = float(save_file.readline())
+            # fractal engine
+            num_FE = float(save_file.readline())
+            cost_FE = float(save_file.readline())
+            cps_FE = float(save_file.readline())
+            # python console
+            num_PC = float(save_file.readline())
+            cost_PC = float(save_file.readline())
+            cps_PC = float(save_file.readline())
+            # idleverse
+            num_Iv = float(save_file.readline())
+            cost_Iv = float(save_file.readline())
+            cps_Iv = float(save_file.readline())
+            # cortex baker
+            num_CB = float(save_file.readline())
+            cost_CB = float(save_file.readline())
+            cps_CB = float(save_file.readline())
         
             # booleans
             first_boot = int(save_file.readline())
+            # golden cookie effects
             in_frenzy = int(save_file.readline())
             frenzy_end = frenzy_end.replace(year = int(save_file.readline()), month = int(save_file.readline()), day = int(save_file.readline()), hour = int(save_file.readline()), minute = int(save_file.readline()), second = int(save_file.readline()), microsecond = int(save_file.readline()))
             in_click_frenzy = int(save_file.readline())
@@ -93,47 +136,71 @@ def load():
         print("No save file detected. Creating new one...\n")
 
 def save():
-    global total_cookies, current_cookies, num_click, gc_got, gc_miss, start_time, num_cursor, cost_cursor, cps_cursor, num_grandma, cost_grandma, cps_grandma, num_farm, cost_farm, cps_farm, num_mine, cost_mine, cps_mine, num_factory, cost_factory, cps_factory, num_bank, cost_bank, cps_bank, num_temple, cost_temple, cps_temple, num_wiz, cost_wiz, cps_wiz, num_ship, cost_ship, cps_ship, num_alc, cost_alc, cps_alc, num_port,cost_port, cps_port, num_tima, cost_tima, cps_tima, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
+    global total_cookies, current_cookies, gc_st, gc_got, gc_miss, start_time, num_C, num_RIF, cost_RIF, num_CTPC, cost_CTPC, num_A, cost_A, num_TF, cost_TF, cost_C, cps_C, num_G, cost_G, cps_G, num_Fr, cost_Fr, cps_Fr, num_M, cost_M, cps_M, num_Fc, cost_Fc, cps_Fc, num_B, cost_B, cps_B, num_T, cost_T, cps_T, num_W, cost_W, cps_W, num_S, cost_S, cps_S, num_AL, cost_AL, cps_AL, num_Po,cost_Po, cps_Po, num_TM, cost_TM, cps_TM, num_AC, cost_AC, cps_AC, num_Pr, cost_Pr, cps_Pr, num_Ch, cost_Ch, cps_Ch, num_FE, cost_FE, cps_FE, num_PC, cost_PC, cps_PC, num_Iv, cost_Iv, cps_Iv, num_CB, cost_CB, cps_CB, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
     try:
         with open(os.path.join(sys.path[0],"SaveData.txt"), "w") as save_file:
             # cookies
             save_file.writelines("%s\n%s\n" % (str(total_cookies), str(current_cookies)))
 
             # clicks
-            save_file.writelines("%s\n" % (str(num_click)))
+            save_file.writelines("%s\n" % (str(gc_st)))
 
             # golden cookies
             save_file.writelines("%s\n%s\n" % (str(gc_got), str(gc_miss)))
 
             # time
             save_file.writelines("%s\n%s\n%s\n%s\n%s\n%s\n%s\n" % (str(start_time.year), str(start_time.month), str(start_time.day), str(start_time.hour), str(start_time.minute), str(start_time.second), str(start_time.microsecond)))
+            
+            # upgrades
+            # reinforced index finger
+            save_file.writelines("%s\n%s\n" % (str(num_RIF), str(cost_RIF)))
+            # carpal tunnel prevention
+            save_file.writelines("%s\n%s\n" % (str(num_CTPC), str(cost_CTPC)))
+            # ambidextrous
+            save_file.writelines("%s\n%s\n" % (str(num_A), str(cost_A)))            
+            # thousand fingers
+            save_file.writelines("%s\n%s\n" % (str(num_TF), str(cost_TF)))
 
             # buildings
             # cursor
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_cursor), str(cost_cursor), str(cps_cursor)))
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_C), str(cost_C), str(cps_C)))
             # grandma
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_grandma), str(cost_grandma), str(cps_grandma)))
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_G), str(cost_G), str(cps_G)))
             # farm
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_farm), str(cost_farm), str(cps_farm)))
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_Fr), str(cost_Fr), str(cps_Fr)))
             # mine
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_mine), str(cost_mine), str(cps_mine)))
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_M), str(cost_M), str(cps_M)))
             # factory
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_factory), str(cost_factory), str(cps_factory)))
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_Fc), str(cost_Fc), str(cps_Fc)))
             # bank
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_bank), str(cost_bank), str(cps_bank)))
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_B), str(cost_B), str(cps_B)))
             # temple
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_temple), str(cost_temple), str(cps_temple)))
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_T), str(cost_T), str(cps_T)))
             # wizard tower
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_wiz), str(cost_wiz), str(cps_wiz)))
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_W), str(cost_W), str(cps_W)))
             # shipment
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_ship), str(cost_ship), str(cps_ship)))
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_S), str(cost_S), str(cps_S)))
             # alchemy lab
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_alc), str(cost_alc), str(cps_alc)))
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_AL), str(cost_AL), str(cps_AL)))
             # portal
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_port), str(cost_port), str(cps_port)))
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_Po), str(cost_Po), str(cps_Po)))
             # time machine
-            save_file.writelines("%s\n%s\n%s\n" % (str(num_tima), str(cost_tima), str(cps_tima)))
-
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_TM), str(cost_TM), str(cps_TM)))
+            # antimatter condenser
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_AC), str(cost_AC), str(cps_AC)))
+            # prism
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_Pr), str(cost_Pr), str(cps_Pr)))
+            # chancemaker
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_Ch), str(cost_Ch), str(cps_Ch)))
+            # fractal engine
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_FE), str(cost_FE), str(cps_FE)))
+            # python console
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_PC), str(cost_PC), str(cps_PC)))
+            # idleverse
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_Iv), str(cost_Iv), str(cps_Iv)))
+            # cortex baker
+            save_file.writelines("%s\n%s\n%s\n" % (str(num_CB), str(cost_CB), str(cps_CB)))
+        
             # booleans
             save_file.writelines(str(first_boot) + "\n")
             save_file.writelines(str(in_frenzy) + "\n")
@@ -237,14 +304,14 @@ def lucky():
 
 def frenzy():
     global in_frenzy, frenzy_time, frenzy_end
-    print("~~Frenzy~~\nClicks per second x7 for 77 seconds.\n")
+    print("~~Frenzy~~\nCookies per second x7 for 77 seconds.\n")
     in_frenzy = 1
     frenzy_time = datetime.datetime.today()
     frenzy_end = frenzy_time + datetime.timedelta(seconds = 77)
 
 def click_frenzy():
     global in_click_frenzy, click_frenzy_time, click_frenzy_end
-    print("~~Click Frenzy~~\ncookies per second x777 for 13 seconds.\n")
+    print("~~Click Frenzy~~\nCookies per click x777 for 13 seconds.\n")
     in_click_frenzy = 1
     click_frenzy_time = datetime.datetime.today()
     click_frenzy_end = click_frenzy_time + datetime.timedelta(seconds = 13)
@@ -255,11 +322,13 @@ def blab():
     print(blab[blab_num] + "\n")
 
 def gc_spawn():
-    global num_click, gc_got, gc_miss
+    global gc_st, gc_got, gc_miss
 
-    if num_click >= 300:
-        if random.randint(300, 900) in range(300, num_click):
-            num_click = 0
+    if gc_st >= 300:
+        if gc_st > 900:
+            gc_st = 0
+        if random.randint(300, 900) in range(300, int(gc_st)):
+            gc_st = 0
             chance = 0
             while(chance < 3):
                 gc_char = chr(random.randint(97, 122))
@@ -285,46 +354,79 @@ def gc_spawn():
                 print("You missed the Golden Cookie.\n")
 
 def shop(type):
-    global in_shop, num_cursor, cost_cursor, num_grandma, cost_grandma, num_farm, cost_farm, num_mine, cost_mine, num_factory, cost_factory, num_bank, cost_bank, num_temple, cost_temple, num_wiz, cost_wiz, num_ship, cost_ship, num_alc, cost_alc, num_port, cost_port, num_tima, cost_tima
+    global in_shop, num_RIF, num_CTPC, num_A, num_TF, num_C, cost_C, num_G, cost_G, num_Fr, cost_Fr, num_M, cost_M, num_Fc, cost_Fc, num_B, cost_B, num_T, cost_T, num_W, cost_W, num_S, cost_S, num_AL, cost_AL, num_Po, cost_Po, num_TM, cost_TM, num_AC, cost_AC, num_Pr, cost_Pr, num_Ch, cost_Ch, num_FE, cost_FE, num_PC, cost_PC, num_Iv, cost_Iv, num_CB, cps_CB
     type = type.lower()
 
     try:
-        if type == "cursor" or type == "1":
+        if type == "reinforced index finger" or type == "u1":
+            type = "reinforced index finger"
+            num_RIF = purchase_u(type, cost_RIF, num_RIF)
+        elif type == "carpal tunnel prevention cream" or type == "u2":
+            type == "carpal tunnel prevention cream"
+            num_CTPC = purchase_u(type, cost_CTPC, num_CTPC)
+        elif type == "ambidextrous" or type == "u3":
+            type == "ambidextrous"
+            num_A = purchase_u(type, cost_A, num_A)
+        elif type == "thousand fingers" or type == "u4":
+            type == "thousand fingers"
+            num_TF = purchase_u(type, cost_TF, num_TF)
+        elif type == "cursor" or type == "1":
             type = "cursor"
-            num_cursor, cost_cursor = (purchase(type, num_cursor, cost_cursor, 15, input("\tAmount: ")))
+            num_C, cost_C = (purchase_b(type, num_C, cost_C, 15, input("\tAmount: ")))
         elif type == "grandma" or type == "2":
             type = "grandma"
-            num_grandma, cost_grandma = (purchase(type, num_grandma, cost_grandma, 100, input("\tAmount: ")))
-        elif (type == "farm" or type == "3") and num_grandma > 0:
+            num_G, cost_G = (purchase_b(type, num_G, cost_G, 100, input("\tAmount: ")))
+        elif (type == "farm" or type == "3") and num_G > 0:
             type = "farm"
-            num_farm, cost_farm = (purchase(type, num_farm, cost_farm, 1100, input("\tAmount: ")))
-        elif (type == "mine" or type == "4") and num_farm > 0:
+            num_Fr, cost_Fr = (purchase_b(type, num_Fr, cost_Fr, 1100, input("\tAmount: ")))
+        elif (type == "mine" or type == "4") and num_Fr > 0:
             type = "mine"
-            num_mine, cost_mine = (purchase(type, num_mine, cost_mine, 12000, input("\tAmount: ")))
-        elif (type == "factory" or type == "5") and num_mine > 0:
+            num_M, cost_M = (purchase_b(type, num_M, cost_M, 12000, input("\tAmount: ")))
+        elif (type == "factory" or type == "5") and num_M > 0:
             type = "factory"
-            num_factory, cost_factory = (purchase(type, num_factory, cost_factory, 130000, input("\tAmount: ")))
-        elif (type == "bank" or type == "6") and num_factory > 0:
+            num_Fc, cost_Fc = (purchase_b(type, num_Fc, cost_Fc, 130000, input("\tAmount: ")))
+        elif (type == "bank" or type == "6") and num_Fc > 0:
             type = "bank"
-            num_bank, cost_bank = (purchase(type, num_bank, cost_bank, 1400000, input("\tAmount: ")))
-        elif (type == "temple" or type == "7") and num_bank > 0:
+            num_B, cost_B = (purchase_b(type, num_B, cost_B, 1400000, input("\tAmount: ")))
+        elif (type == "temple" or type == "7") and num_B > 0:
             type = "temple"
-            num_temple, cost_temple = (purchase(type, num_temple, cost_temple, 20000000, input("\tAmount: ")))
-        elif (type == "wizard tower" or type == "8") and num_temple > 0:
+            num_T, cost_T = (purchase_b(type, num_T, cost_T, 20000000, input("\tAmount: ")))
+        elif (type == "wizard tower" or type == "8") and num_T > 0:
             type = "wizard tower"
-            num_wiz, cost_wiz = (purchase(type, num_wiz, cost_wiz, 330000000, input("\tAmount: ")))
-        elif (type == "shipment" or type == "9") and num_wiz > 0:
+            num_W, cost_W = (purchase_b(type, num_W, cost_W, 330000000, input("\tAmount: ")))
+        elif (type == "shipment" or type == "9") and num_W > 0:
             type = "shipment"
-            num_ship, cost_ship = (purchase(type, num_ship, cost_ship, 5100000000, input("\tAmount: ")))
-        elif (type == "alchemy lab" or type == "10") and num_ship > 0:
+            num_S, cost_S = (purchase_b(type, num_S, cost_S, 5100000000, input("\tAmount: ")))
+        elif (type == "alchemy lab" or type == "10") and num_S > 0:
             type = "alchemy lab"
-            num_alc, cost_alc = (purchase(type, num_alc, cost_alc, 75000000000, input("\tAmount: ")))
-        elif (type == "portal" or type == "11") and num_alc > 0:
+            num_AL, cost_AL = (purchase_b(type, num_AL, cost_AL, 75000000000, input("\tAmount: ")))
+        elif (type == "portal" or type == "11") and num_AL > 0:
             type = "portal"
-            num_port, cost_port = (purchase(type, num_port, cost_port, 1000000000000, input("\tAmount: ")))
-        elif (type == "time machine" or type == "12") and num_port > 0:
+            num_Po, cost_Po = (purchase_b(type, num_Po, cost_Po, 1000000000000, input("\tAmount: ")))
+        elif (type == "time machine" or type == "12") and num_Po > 0:
             type = "time machine"
-            num_tima, cost_tima = (purchase(type, num_tima, cost_tima, 14000000000000, input("\tAmount: ")))
+            num_TM, cost_TM = (purchase_b(type, num_TM, cost_TM, 14000000000000, input("\tAmount: ")))
+        elif (type == "antimatter condenser" or type == "13") and num_TM > 0:
+            type = "antimatter condenser"
+            num_AC, cost_AC = (purchase_b(type, num_AC, cost_AC, 170000000000000, input("\tAmount: ")))
+        elif (type == "prism" or type == "14") and num_AC > 0:
+            type = "prism"
+            num_Pr, cost_Pr = (purchase_b(type, num_Pr, cost_Pr, 2100000000000000, input("\tAmount: ")))
+        elif (type == "chancemaker" or type == "15") and num_Pr > 0:
+            type = "chancemaker"
+            num_Ch, cost_Ch = (purchase_b(type, num_Ch, cost_Ch, 26000000000000000, input("\tAmount: ")))
+        elif (type == "fractal engine" or type == "16") and num_Ch > 0:
+            type = "fractal engine"
+            num_FE, cost_FE = (purchase_b(type, num_FE, cost_FE, 310000000000000000, input("\tAmount: ")))
+        elif (type == "python console" or type == "17") and num_FE > 0:
+            type = "python console"
+            num_PC, cost_PC = (purchase_b(type, num_PC, cost_PC, 71000000000000000000, input("\tAmount: ")))
+        elif (type == "idleverse" or type == "18") and num_PC > 0:
+            type = "idleverse"
+            num_Iv, cost_Iv = (purchase_b(type, num_Iv, cost_Iv, 12000000000000000000000, input("\tAmount: ")))
+        elif (type == "cortex baker" or type == "19") and num_Iv > 0:
+            type = "cortex baker"
+            num_CB, cost_CB = (purchase_b(type, num_CB, cost_CB, 1900000000000000000000000, input("\tAmount: ")))
     
         elif "desc" in type:
             clear()
@@ -332,25 +434,25 @@ def shop(type):
                 print("[Cursor] --> Clicks cookies alongside you. Who controls them...?; increases cookies per second by 0.1")
             elif type == "desc.grandma" or type == "desc.2":
                 print("[Grandma] --> Bakes for you. How nice!; increases cookies per second by 1")
-            elif (type == "desc.farm" or type == "desc.3") and num_grandma > 0:
+            elif (type == "desc.farm" or type == "desc.3") and num_G > 0:
                 print("[Farm] --> Grows cookies for harvesting. Don't think about it too hard; increases cookies per second by 8")
-            elif (type == "desc.mine" or type == "desc.4") and num_farm > 0:
+            elif (type == "desc.mine" or type == "desc.4") and num_Fr > 0:
                 print("[Mine] --> Extracts the natural cookies of the Earth. What, you didn't know about that?; increases cookies per second by 47")
-            elif (type == "desc.factory" or type == "desc.5") and num_mine > 0:
+            elif (type == "desc.factory" or type == "desc.5") and num_M > 0:
                 print("[Factory] --> Mass-produces cookies on a global scale. It's not a monopoly, it's business; increases cookies per second by 260")
-            elif (type == "desc.bank" or type == "desc.6") and num_factory > 0:
+            elif (type == "desc.bank" or type == "desc.6") and num_Fc > 0:
                 print("[Bank] --> Take out a copious number of cookie loans. Bad credit?\n\nWell i was shopping for a new car which ones me?\nA cool convertible or an SUV\nToo bad i didn't know my credit was whack and now I'm driving off the lot in a used sub-compact\nF-R-E-E that spells free. creditreport.com baby\nSaw their ads on my TV, thought about going but was too lazy\nNow instead of looking fly and rolling fat My legs are sticking to the vinyl and my posses getting laughed at!\nF-R-E-E that spell free. creditreport.com baby!;\n\nincreases cookies per second by 1.4K")
-            elif (type == "desc.temple" or type == "desc.7") and num_bank > 0:
+            elif (type == "desc.temple" or type == "desc.7") and num_B > 0:
                 print("[Temple] --> Pray to the Cookie Gods, I'm sure they'll love you; increases cookies per second by 7.8K")
-            elif (type == "desc.wizard tower" or type == "desc.8") and num_temple > 0:
+            elif (type == "desc.wizard tower" or type == "desc.8") and num_T > 0:
                 print("[Wizard Tower] --> Enlist the help of Cookie Wizards throughout the world; increases cookies per second by 44K")
-            elif (type == "desc.shipment" or type == "desc.9") and num_wiz > 0:
+            elif (type == "desc.shipment" or type == "desc.9") and num_W > 0:
                 print("[Shipment] --> Order shipments of cookies from far off planets. Did someone order a package?; increases cookies per second by 260K")
-            elif (type == "desc.alchemy lab" or type == "desc.10") and num_ship > 0:
+            elif (type == "desc.alchemy lab" or type == "desc.10") and num_S > 0:
                 print("[Alchemy Lab] --> Synthesize cookies to your heart's content. Are we breaking any natural laws here?; increases cookies per second by 1.6M")
-            elif (type == "desc.portal" or type == "desc.11") and num_alc > 0:
+            elif (type == "desc.portal" or type == "desc.11") and num_AL > 0:
                 print("[Portal] --> Open a portal to the Cookie Dimension. Shovel as many cookies as you can before the spacetime-continuum collapses; increases cookies per second by 10M")
-            elif (type == "desc.time machine" or type == "desc.12") and num_port > 0:
+            elif (type == "desc.time machine" or type == "desc.12") and num_Po > 0:
                 print("[Time Machine] --> Travel back in time and steal the cookies yet to be baked. Try not to make out with your mom; increases cookies per second by 65M")
             else:
                 print("Input not recognized or building not unlocked")
@@ -362,12 +464,24 @@ def shop(type):
 
         else:
             clear()
-            print("Input error\n")
+            print("Input not recognized or building not unlocked\n")
     except:
         clear()
         print("Input error\n")
 
-def purchase(building, num_build, cost_build, initial_cost, amount):
+def purchase_u(upgrade, cost, num_up):
+    global current_cookies
+    clear()
+    if current_cookies - cost >= 0:
+        current_cookies -= cost
+        num_up += 1
+        print("You now have the [%s] upgrade\n" % upgrade)
+    else:
+        print("You don't have enough cookies to buy the [%s] upgrade\n" % upgrade)
+
+    return num_up
+
+def purchase_b(building, num_build, cost_build, initial_cost, amount):
     global current_cookies
     if amount.lower() == "max" or amount.lower() == "m":
         clear()
@@ -399,60 +513,102 @@ total_cookies = 0
 current_cookies = 0
 # clicks
 cpc = 1
-num_click = 0
+gc_st = 0
 # golden cookies
 gc_got = 0
 gc_miss = 0
 
+# upgrade data
+# reinforced index finger data
+num_RIF = 0
+cost_RIF = 100
+# carpal tunnel prevention cream data
+num_CTPC = 0
+cost_CTPC = 500
+# ambidextrous data
+num_A = 0
+cost_A = 10000
+# thousand fingers data
+num_TF = 0
+cost_TF = 100000
+
 # building data
 # cursor data
-num_cursor = 0
-cost_cursor = 15
-cps_cursor = .1
+num_C = 0
+cost_C = 15
+cps_C = .1
 # grandma data
-num_grandma = 0
-cost_grandma = 100
-cps_grandma = 1
+num_G = 0
+cost_G = 100
+cps_G = 1
 # farm data
-num_farm = 0
-cost_farm = 1100
-cps_farm = 8
+num_Fr = 0
+cost_Fr = 1100
+cps_Fr = 8
 # mine data
-num_mine = 0
-cost_mine = 12000
-cps_mine = 47
+num_M = 0
+cost_M = 12000
+cps_M = 47
 # factory data
-num_factory = 0
-cost_factory = 130000
-cps_factory = 260
+num_Fc = 0
+cost_Fc = 130000
+cps_Fc = 260
 # bank data
-num_bank = 0
-cost_bank = 1400000
-cps_bank = 1400
+num_B = 0
+cost_B = 1400000
+cps_B = 1400
 # temple data
-num_temple = 0
-cost_temple = 20000000
-cps_temple = 7800
+num_T = 0
+cost_T = 20000000
+cps_T = 7800
 # wizard tower data
-num_wiz = 0
-cost_wiz = 330000000
-cps_wiz = 44000
+num_W = 0
+cost_W = 330000000
+cps_W = 44000
 # shipment data
-num_ship = 0
-cost_ship = 5100000000
-cps_ship = 260000
+num_S = 0
+cost_S = 5100000000
+cps_S = 260000
 # alchemy lab data
-num_alc = 0
-cost_alc = 75000000000
-cps_alc = 1600000
+num_AL = 0
+cost_AL = 75000000000
+cps_AL = 1600000
 # portal data
-num_port = 0
-cost_port = 1000000000000
-cps_port = 10000000
+num_Po = 0
+cost_Po = 1000000000000
+cps_Po = 10000000
 # time machine data
-num_tima = 0
-cost_tima = 14000000000000
-cps_tima = 65000000
+num_TM = 0
+cost_TM = 14000000000000
+cps_TM = 65000000
+# antimatter condenser data
+num_AC = 0
+cost_AC = 170000000000000
+cps_AC = 430000000
+# prism data
+num_Pr = 0
+cost_Pr = 2100000000000000
+cps_Pr = 2900000000
+# chancemaker data
+num_Ch = 0
+cost_Ch = 26000000000000000
+cps_Ch = 21000000000
+# fractal engine data
+num_FE = 0
+cost_FE = 310000000000000000
+cps_FE = 150000000000
+# python console data
+num_PC = 0
+cost_PC = 71000000000000000000
+cps_PC = 1100000000000
+# idleverse data
+num_Iv = 0
+cost_Iv = 12000000000000000000000
+cps_Iv = 8300000000000
+# cortex baker data
+num_CB = 0
+cost_CB = 1900000000000000000000000
+cps_CB = 64000000000000
 
 # status booleans
 in_shop = False
@@ -480,9 +636,16 @@ else:
 
 # main loop
 while(True):
+    # cpc calculation
+    cpc = (1 + (.1 * (num_TF*(num_G + num_Fr + num_M + num_Fc + num_B + num_T + num_W + num_S + num_AL + num_Po + num_TM + num_AC + num_Pr + num_Ch + num_FE + num_PC + num_Iv + num_CB)))) * (num_RIF + 1) * (num_CTPC + 1) * (num_A + 1)
+    if in_click_frenzy == 1 and end_time < click_frenzy_end:
+        cpc *= 777
+
     # cps calculation
-    cps = cps_cursor*num_cursor + cps_grandma*num_grandma + cps_farm*num_farm + cps_mine*num_mine + cps_factory*num_factory + cps_bank*num_bank + cps_temple*num_temple + cps_wiz*num_wiz + cps_ship*num_ship + cps_alc*num_alc + cps_port*num_port + cps_tima*num_tima
-    
+    cps = cps_C*num_C + cps_G*num_G + cps_Fr*num_Fr + cps_M*num_M + cps_Fc*num_Fc + cps_B*num_B + cps_T*num_T + cps_W*num_W + cps_S*num_S + cps_AL*num_AL + cps_Po*num_Po + cps_TM*num_TM + cps_AC*num_AC + cps_Pr*num_Pr + cps_Ch*num_Ch + cps_FE*num_FE + cps_PC*num_PC + cps_Iv*num_Iv + cps_CB*num_CB
+    if in_frenzy == 1 and end_time < frenzy_end:
+        cps *= 7
+
     # input
     user_input = input("[%s cookies] +%s cookies per second\nEnter command: " % (display_num(current_cookies), display_num2(cps))).lower()
 
@@ -492,24 +655,13 @@ while(True):
         
         # update time value
         end_time = datetime.datetime.today()
-        
-        # during frenzy
-        if in_frenzy == 1 and end_time < frenzy_end:
-            total_cookies += ((end_time - start_time).total_seconds() * (cps * 7)) + cpc * 7
-            current_cookies += ((end_time - start_time).total_seconds() * (cps * 7)) + cpc * 7
-        
-        # during click frenzy
-        elif in_click_frenzy == 1 and end_time < click_frenzy_end:
-            total_cookies += ((end_time - start_time).total_seconds() * (cps * 777)) + cpc * 777
-            current_cookies += ((end_time - start_time).total_seconds() * (cps * 777)) + cpc * 777
-        
-        # normal click
-        else:
-            total_cookies += ((end_time - start_time).total_seconds() * (cps)) + cpc
-            current_cookies += ((end_time - start_time).total_seconds() * (cps)) + cpc
-        num_click += 1
+
+        total_cookies += ((end_time - start_time).total_seconds() * (cps)) + cpc
+        current_cookies += ((end_time - start_time).total_seconds() * (cps)) + cpc
+        gc_st += (end_time - start_time).total_seconds()
         start_time = datetime.datetime.today()
         gc_spawn()
+        print("+%s cookies" % display_num2(cpc))
 
     # help
     elif user_input == "/h" or user_input == "help":
@@ -542,22 +694,29 @@ while(True):
         print("""You have cooked %s total cookies.
 You currently have %s cookies.
 cps = %s
-num_click = %s
+gc_st = %s
 gc_got = %s
 gc_miss = %s
-num_cursor = %d
-num_grandma = %d
-num_farm = %d
-num_mine = %d
-num_factory = %d
-num_bank = %d
-num_temple = %d
-num_wiz = %d
-num_ship = %d
-num_alc = %d
-num_port = %d
-num_tima = %d
-""" % (display_num2(total_cookies), display_num2(current_cookies), display_num2(cps), num_click, gc_got, gc_miss, num_cursor, num_grandma, num_farm, num_mine, num_factory, num_bank, num_temple, num_wiz, num_ship, num_alc, num_port, num_tima))
+num_C = %d
+num_G = %d
+num_Fr = %d
+num_M = %d
+num_Fc = %d
+num_B = %d
+num_T = %d
+num_W = %d
+num_S = %d
+num_AL = %d
+num_Po = %d
+num_TM = %d
+num_AC = %d
+num_Pr = %d
+num_Ch = %d
+num_FE = %d
+num_PC = %d
+num_Iv = %d
+num_CB = %d
+""" % (display_num2(total_cookies), display_num2(current_cookies), display_num2(cps), gc_st, gc_got, gc_miss, num_C, num_G, num_Fr, num_M, num_Fc, num_B, num_T, num_W, num_S, num_AL, num_Po, num_TM, num_AC, num_Pr, num_Ch, num_FE, num_PC, num_Iv, num_CB))
     
     # enter shop
     elif user_input == "/s" or user_input == "shop":
@@ -565,48 +724,105 @@ num_tima = %d
         in_shop = True
         while(in_shop):
             print("Enter building name or type 'desc.BUILDING NAME' or type 'exit'")
-            print("[Cookies: %s]\n\n[1] Cursor --> [%s cookies]\n[2] Grandma --> [%s cookies]" % (display_num(current_cookies), display_num(cost_cursor), display_num(cost_grandma)))
-            if num_grandma > 0:
-                print("[3] Farm --> [%s cookies]" % display_num(cost_farm))
+            print("\n~~Upgrades~~")
+            if num_RIF < 1:
+                if num_C >= 1:
+                    print("[u1] Reinforced index finger --> [%s cookies]" % display_num(cost_RIF))
+                else:
+                    print("[u1] ?????????? ????? ?????? --> [??? cookies]")
+            else:
+                print("Upgrade Purchased")
+            if num_CTPC < 1:
+                if num_C >= 1:
+                    print("[u2] Carpal tunnel prevention cream --> [%s cookies]" % display_num(cost_CTPC))
+                else:
+                    print("[u2] ?????? ?????? ?????????? ????? --> [??? cookies]")
+            else:
+                print("Upgrade Purchased")
+            if num_A < 1:
+                if num_C >= 10:
+                    print("[u3] Ambidextrous --> [%s cookies]" % display_num(cost_A))
+                else:
+                    print("[u3] ???????????? --> [??? cookies]")
+            else:
+                print("Upgrade Purchased")
+            if num_TF < 1:
+                if num_C >= 25:
+                    print("[u4] Thousand fingers --> [%s cookies]" % display_num(cost_TF))
+                else:
+                    print("[u4] ???????? ??????? --> [??? cookies]")
+            else:
+                print("Upgrade Purchased")
+            print("\n~~Buildings~~\n[1] Cursor --> [%s cookies]\n[2] Grandma --> [%s cookies]" % (display_num(cost_C), display_num(cost_G)))
+            if num_G > 0:
+                print("[3] Farm --> [%s cookies]" % display_num(cost_Fr))
             else:
                 print("[3] ???? --> [??? cookies]")
-            if num_farm > 0:
-                print("[4] Mine --> [%s cookies]" % display_num(cost_mine))
+            if num_Fr > 0:
+                print("[4] Mine --> [%s cookies]" % display_num(cost_M))
             else:
                 print("[4] ???? --> [??? cookies]")
-            if num_mine > 0:
-                print("[5] Factory --> [%s cookies]" % display_num(cost_factory))
+            if num_M > 0:
+                print("[5] Factory --> [%s cookies]" % display_num(cost_Fc))
             else:
                 print("[5] ??????? --> [??? cookies]")
-            if num_factory > 0:
-                print("[6] Bank --> [%s cookies]" % display_num(cost_bank))
+            if num_Fc > 0:
+                print("[6] Bank --> [%s cookies]" % display_num(cost_B))
             else:
                 print("[6] ???? --> [??? cookies]")
-            if num_bank > 0:
-                print("[7] Temple --> [%s cookies]" % display_num(cost_temple))
+            if num_B > 0:
+                print("[7] Temple --> [%s cookies]" % display_num(cost_T))
             else:
                 print("[7] ?????? --> [??? cookies]")
-            if num_temple > 0:
-                print("[8] Wizard Tower --> [%s cookies]" % display_num(cost_wiz))
+            if num_T > 0:
+                print("[8] Wizard Tower --> [%s cookies]" % display_num(cost_W))
             else:
                 print("[8] ?????? ????? --> [??? cookies]")
-            if num_wiz > 0:
-                print("[9] Shipment --> [%s cookies]" % display_num(cost_ship))
+            if num_W > 0:
+                print("[9] Shipment --> [%s cookies]" % display_num(cost_S))
             else:
                 print("[9] ???????? --> [??? cookies]")
-            if num_ship > 0:
-                print("[10] Alchemy Lab --> [%s cookies]" % display_num(cost_alc))
+            if num_S > 0:
+                print("[10] Alchemy Lab --> [%s cookies]" % display_num(cost_AL))
             else:
                 print("[10] ??????? ??? --> [??? cookies]")
-            if num_alc > 0:
-                print("[11] Portal --> [%s cookies]" % display_num(cost_port))
+            if num_AL > 0:
+                print("[11] Portal --> [%s cookies]" % display_num(cost_Po))
             else:
                 print("[11] ?????? --> [??? cookies]")
-            if num_port > 0:
-                print("[12] Time Machine --> [%s cookies]" % display_num(cost_tima))
+            if num_Po > 0:
+                print("[12] Time Machine --> [%s cookies]" % display_num(cost_TM))
             else:
                 print("[12] ???? ??????? --> [??? cookies]")
-            shop(input("\nEnter shop command: "))
+            if num_TM > 0:
+                print("[13] Antimatter Condenser --> [%s cookies]" % display_num(cost_AC))
+            else:
+                print("[13] ?????????? ????????? --> [??? cookies]")
+            if num_AC > 0:
+                print("[14] Prism --> [%s cookies]" % display_num(cost_Pr))
+            else:
+                print("[14] ????? --> [??? cookies]")
+            if num_Pr > 0:
+                print("[15] Chancemaker --> [%s cookies]" % display_num(cost_Ch))
+            else:
+                print("[15] ??????????? --> [??? cookies]")
+            if num_Ch > 0:
+                print("[16] Fractal Engine --> [%s cookies]" % display_num(cost_FE))
+            else:
+                print("[16] ??????? ?????? --> [??? cookies]")
+            if num_FE > 0:
+                print("[17] Python Console --> [%s cookies]" % display_num(cost_PC))
+            else:
+                print("[17] ?????? ??????? --> [??? cookies]")
+            if num_PC > 0:
+                print("[18] Idleverse --> [%s cookies]" % display_num(cost_Iv))
+            else:
+                print("[18] ????????? --> [??? cookies]")
+            if num_Iv > 0:
+                print("[19] Cortex Baker --> [%s cookies]" % display_num(cost_CB))
+            else:
+                print("[19] ?????? ????? --> [??? cookies]")
+            shop(input("\n[%s Cookies]\nEnter shop command: " % display_num(current_cookies)))
     
     # save
     elif user_input == "/sf" or user_input == "save":
