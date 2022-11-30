@@ -3,7 +3,7 @@
 '''
 Python Clicker
 
-Small-scale Python terminal remake of Cookie Clicker made by Cristiano Porretta as a Python I final project.
+Small-scale text-based remake of Cookie Clicker made by Cristiano Porretta as a Python I final project.
 
 Original source: https://github.com/ShaShaMan26/PythonClicker
 '''
@@ -497,19 +497,21 @@ def purchase_u(upgrade, cost, num_up):
     if current_cookies - cost >= 0:
         current_cookies -= cost
         num_up += 1
-        print("You now have the [%s] upgrade\n" % upgrade)
+        print("You now have the %s upgrade and cook [%.2f] cookies per click.\n" % (upgrade.title(), cpc))
     else:
-        print("You don't have enough cookies to buy the [%s] upgrade\n" % upgrade)
+        print("You don't have enough cookies to buy the %s upgrade.\n" % upgrade.title())
 
     return num_up
 
 def purchase_b(building, num_build, cost_build, initial_cost, amount):
     global current_cookies
+    i = 0
     if amount.lower() == "max" or amount.lower() == "m":
         clear()
         while(current_cookies >= cost_build):
             current_cookies -= float(cost_build)
             num_build += 1
+            i += 1
             cost_build = initial_cost * (1.15 ** num_build)
     elif int(amount) >= 1:
         amount = int(amount)
@@ -518,14 +520,15 @@ def purchase_b(building, num_build, cost_build, initial_cost, amount):
             while(amount >= 1 and current_cookies >= cost_build):
                 current_cookies -= float(cost_build)
                 num_build += 1
+                i += 1
                 cost_build = initial_cost * (1.15 ** num_build)
                 amount -= 1
         else:
-            print("You dont have enough cookies to buy [%d] %s(s)." % (amount, building))
+            pass
     else:
         clear()
         print("amount error")
-    print("You now have [%d] %s(s)\n" % (num_build, building))
+    print("You were able to buy [%d] %s(s) and have [%d] total.\n" % (i, building, num_build))
 
     return [num_build, cost_build]
     
@@ -651,7 +654,7 @@ load()
 
 # welcome text
 if first_boot == 1:
-    print("Welcome to Python Clicker; a Python Terminal remake of the hit game Cooke Clicker!\nAll actions are preformed by entering commands in the terminal. Type '/h' or 'help' for list of commands.\n")
+    print("Welcome to Python Clicker; a text-based remake of the hit game Cooke Clicker!\nAll actions are preformed by entering commands in the terminal. Type '/h' or 'help' for list of commands.\n")
     first_boot = 0
 else:
     print("Welcome back to Python Clicker!\nType '/h' or 'help' for list of commands.\n")
@@ -689,7 +692,7 @@ while(True):
     elif user_input == "/h" or user_input == "help":
         clear()
         print("""List of Commands:
-        '' (Empty Input) - Clicks Cookie
+        '' (Empty Input) - Click Cookie
         '/s' or 'shop' - Enter shop
         '/st' or 'stats' - View statistics
         '/h' or 'help' - View List of Commands
@@ -704,10 +707,14 @@ while(True):
         clear()
         print("""About Python Clicker:
 
-    Python Clicker is a limited text terminal remake of the hit game Cookie Clicker within the Python coding language.
+    Python Clicker is a limited text-based remake of the hit game Cookie Clicker within the Python coding language.
         
-    As everything runs within the terminal, values only update once an action is preformed. 
-    I assure you, however, that cookie production is calculated based on the passage of real world time.
+    Your goal is to cook as many cookies as you can.
+    "Click" cookies to bake them and spend your cultivated cookies in the shop for upgrades that increase your yield of cookies per click or on buildings that generate cookies for you.
+    You can also uncover the ~lore~ in the shop by reading upgrade/building descriptions.
+    Occasionally "Golden Cookies" will appear, collect them for various rewards.
+
+    Have fun!
         """)
 
     # stats

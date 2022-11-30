@@ -3,13 +3,17 @@ Run file with Python 3.10 (can be found here https://apps.microsoft.com/store/de
 Save Data stored in SaveData.txt
 
 About Python Clicker:
-        Python Clicker is a limited text terminal remake of the hit game Cookie Clicker within the Python coding language.
+        Python Clicker is a limited text-based remake of the hit game Cookie Clicker within the Python coding language.
         
-        As everything runs within the terminal, values only update once an action is preformed. 
-        I assure you, however, that cookie production is calculated based on the passage of real world time.
+        Your goal is to cook as many cookies as you can.
+        "Click" cookies to bake them and spend your cultivated cookies in the shop for upgrades that increase your yield of cookies per click or on buildings that generate cookies for you.
+        You can also uncover the ~lore~ in the shop by reading upgrade/building descriptions.
+        Occasionally "Golden Cookies" will appear, collect them for various rewards.
+
+        Have fun!
 
 List of Commands:
-        '' (Empty Input) - Clicks Cookie
+        '' (Empty Input) - Click Cookie
         '/s' or 'shop' - Enter shop
         '/st' or 'stats' - View statistics
         '/h' or 'help' - View List of Commands

@@ -1,4 +1,11 @@
 ***Patch Notes***
+Update 3
+- ADDED: Upgrades - power up your click power with upgrades
+- ADDED: Buildings - all 19 buildings are now in the game
+- FIXED: CPS calculation - cookie yield is now accurately calculated
+- ADJUSTED: Golden Cooke effects - Frenzy and Click Frenzy effects now only affect one form of cookie production
+- ADJUSTED: UI - user experience should now be much better with more descriptive output and more guidance
+
 Update 2
 - FIXED: CookiesPerSecond - now calculates correctly
 - FIXED: Saving - restored and updated to store new information
