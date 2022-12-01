@@ -13,7 +13,15 @@ import random, time, os, sys, datetime
 
 # load save function
 def load():
-    global total_cookies, current_cookies, gc_st, gc_got, gc_miss, start_time, num_C, num_RIF, cost_RIF, num_CTPC, cost_CTPC, num_A, cost_A, num_TF, cost_TF, cost_C, cps_C, num_G, cost_G, cps_G, num_Fr, cost_Fr, cps_Fr, num_M, cost_M, cps_M, num_Fc, cost_Fc, cps_Fc, num_B, cost_B, cps_B, num_T, cost_T, cps_T, num_W, cost_W, cps_W, num_S, cost_S, cps_S, num_AL, cost_AL, cps_AL, num_Po,cost_Po, cps_Po, num_TM, cost_TM, cps_TM, num_AC, cost_AC, cps_AC, num_Pr, cost_Pr, cps_Pr, num_Ch, cost_Ch, cps_Ch, num_FE, cost_FE, cps_FE, num_PC, cost_PC, cps_PC, num_Iv, cost_Iv, cps_Iv, num_CB, cost_CB, cps_CB, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
+    '''
+    Loads save data from SaveData.txt.
+
+    args:
+        N/A
+    returns:
+        N/A
+    '''
+    global total_cookies, current_cookies, gc_st, gc_got, gc_miss, first_time, start_time, num_C, num_RIF, cost_RIF, num_CTPC, cost_CTPC, num_A, cost_A, num_TF, cost_TF, cost_C, cps_C, num_G, cost_G, cps_G, num_Fr, cost_Fr, cps_Fr, num_M, cost_M, cps_M, num_Fc, cost_Fc, cps_Fc, num_B, cost_B, cps_B, num_T, cost_T, cps_T, num_W, cost_W, cps_W, num_S, cost_S, cps_S, num_AL, cost_AL, cps_AL, num_Po,cost_Po, cps_Po, num_TM, cost_TM, cps_TM, num_AC, cost_AC, cps_AC, num_Pr, cost_Pr, cps_Pr, num_Ch, cost_Ch, cps_Ch, num_FE, cost_FE, cps_FE, num_PC, cost_PC, cps_PC, num_Iv, cost_Iv, cps_Iv, num_CB, cost_CB, cps_CB, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
     try:
         with open(os.path.join(sys.path[0],"SaveData.txt"), "r") as save_file:
         
@@ -28,7 +36,8 @@ def load():
             gc_got = float(save_file.readline())
             gc_miss = float(save_file.readline())
 
-            # time
+            # time            
+            first_time = first_time.replace(year = int(save_file.readline()), month = int(save_file.readline()), day = int(save_file.readline()), hour = int(save_file.readline()), minute = int(save_file.readline()), second = int(save_file.readline()), microsecond = int(save_file.readline()))
             start_time = start_time.replace(year = int(save_file.readline()), month = int(save_file.readline()), day = int(save_file.readline()), hour = int(save_file.readline()), minute = int(save_file.readline()), second = int(save_file.readline()), microsecond = int(save_file.readline()))
             
             # upgrades
@@ -136,7 +145,15 @@ def load():
         print("No save file detected. Creating new one...\n")
 
 def save():
-    global total_cookies, current_cookies, gc_st, gc_got, gc_miss, start_time, num_C, num_RIF, cost_RIF, num_CTPC, cost_CTPC, num_A, cost_A, num_TF, cost_TF, cost_C, cps_C, num_G, cost_G, cps_G, num_Fr, cost_Fr, cps_Fr, num_M, cost_M, cps_M, num_Fc, cost_Fc, cps_Fc, num_B, cost_B, cps_B, num_T, cost_T, cps_T, num_W, cost_W, cps_W, num_S, cost_S, cps_S, num_AL, cost_AL, cps_AL, num_Po,cost_Po, cps_Po, num_TM, cost_TM, cps_TM, num_AC, cost_AC, cps_AC, num_Pr, cost_Pr, cps_Pr, num_Ch, cost_Ch, cps_Ch, num_FE, cost_FE, cps_FE, num_PC, cost_PC, cps_PC, num_Iv, cost_Iv, cps_Iv, num_CB, cost_CB, cps_CB, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
+    '''
+    Saves save data to SaveData.txt. Creates new file if none found.
+
+    args:
+        N/A
+    returns:
+        N/A
+    '''
+    global total_cookies, current_cookies, gc_st, gc_got, gc_miss, first_time, start_time, num_C, num_RIF, cost_RIF, num_CTPC, cost_CTPC, num_A, cost_A, num_TF, cost_TF, cost_C, cps_C, num_G, cost_G, cps_G, num_Fr, cost_Fr, cps_Fr, num_M, cost_M, cps_M, num_Fc, cost_Fc, cps_Fc, num_B, cost_B, cps_B, num_T, cost_T, cps_T, num_W, cost_W, cps_W, num_S, cost_S, cps_S, num_AL, cost_AL, cps_AL, num_Po,cost_Po, cps_Po, num_TM, cost_TM, cps_TM, num_AC, cost_AC, cps_AC, num_Pr, cost_Pr, cps_Pr, num_Ch, cost_Ch, cps_Ch, num_FE, cost_FE, cps_FE, num_PC, cost_PC, cps_PC, num_Iv, cost_Iv, cps_Iv, num_CB, cost_CB, cps_CB, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
     try:
         with open(os.path.join(sys.path[0],"SaveData.txt"), "w") as save_file:
             # cookies
@@ -149,6 +166,7 @@ def save():
             save_file.writelines("%s\n%s\n" % (str(gc_got), str(gc_miss)))
 
             # time
+            save_file.writelines("%s\n%s\n%s\n%s\n%s\n%s\n%s\n" % (str(first_time.year), str(first_time.month), str(first_time.day), str(first_time.hour), str(first_time.minute), str(first_time.second), str(first_time.microsecond)))
             save_file.writelines("%s\n%s\n%s\n%s\n%s\n%s\n%s\n" % (str(start_time.year), str(start_time.month), str(start_time.day), str(start_time.hour), str(start_time.minute), str(start_time.second), str(start_time.microsecond)))
             
             # upgrades
@@ -215,10 +233,26 @@ def save():
         print("Saving error\n")
 
 def clear():
+    '''
+    Clears terminal.
+    
+    args:
+        N/A
+    returns:
+        N/A
+    '''
     os.system('clear')
 
 def display_num(num):
-    
+    '''
+    Formats abbreviated numbers. Ex: 1000 --> 1K
+
+    args:
+        num: number to be abbreviated.
+    returns:
+        display_num: formatted number.
+    '''
+    #designates suffix letter
     # thousand
     if num >= 1000 and num < 1000000:
         end = "K"
@@ -244,6 +278,7 @@ def display_num(num):
     elif num >= 1000000000000000000000000 and num < 1000000000000000000000000000:
         end = "S"
 
+    # checks how many digits are to be displayed
     num = int(num)
     if num < 1000:
         display_num = num
@@ -268,17 +303,25 @@ def display_num(num):
     return display_num
 
 def display_num2(num):
-    
+    '''
+    Formats numbers to have ',' every three places. Ex: 1000 --> 1,000
+
+    args:
+        num: number to be abbreviated.
+    returns:
+        display_num: formatted number.
+    '''
     display_num = ""
 
+    # breaks up num into two variables
     num = str(float("%.2f" % (num)))
-
     num = num.split(".")
-
     (front_half, back_half) = num
 
+    # used for number of iterations
     length = len(front_half)
 
+    # places a ',' after every three digits
     for digit in front_half:
         length -= 1
         if length % 3 == 0 and length > 1:
@@ -291,18 +334,37 @@ def display_num2(num):
     return display_num
 
 def lucky():
+    '''
+    Instantly gain an amount of cookies equal to either 15% of current_cookies +13
+    or 15 min worth of cookies +13 (whichever is less).
+
+    args:
+        N/A
+    returns:
+        N/A
+    '''
     global total_cookies, cps, current_cookies
     print("~~Lucky!~~")
+    # adds 15% of current_cookies +13 to current/total_cookies
     if (1.15 * (current_cookies + 13)) <= ((cps * 900) + 13):
         total_cookies += (1.15 * (current_cookies + 13))
         current_cookies += (1.15 * (current_cookies + 13))
         print("+%s cookies\n" % display_num2(1.15 * (current_cookies + 13)))
+    # adds 15 min worth of cookies +13 to current/total_cookies
     else:
         total_cookies += ((cps * 900) + 13)
         current_cookies += ((cps * 900) + 13)
         print("+%s cookies\n" % display_num2((cps * 900) + 13))
 
 def frenzy():
+    '''
+    Multiplies cookie production by x7 for 77 seconds.
+
+    args:
+        N/A
+    returns:
+        N/A
+    '''
     global in_frenzy, frenzy_time, frenzy_end
     print("~~Frenzy~~\nCookies per second x7 for 77 seconds.\n")
     in_frenzy = 1
@@ -310,6 +372,14 @@ def frenzy():
     frenzy_end = frenzy_time + datetime.timedelta(seconds = 77)
 
 def click_frenzy():
+    '''
+    Multiplies Cookies per Click by x777 for 13 seconds.
+
+    args:
+        N/A
+    returns:
+        N/A
+    '''
     global in_click_frenzy, click_frenzy_time, click_frenzy_end
     print("~~Click Frenzy~~\nCookies per click x777 for 13 seconds.\n")
     in_click_frenzy = 1
@@ -317,13 +387,29 @@ def click_frenzy():
     click_frenzy_end = click_frenzy_time + datetime.timedelta(seconds = 13)
 
 def blab():
+    '''
+    Displays random message from list 'blab'.
+
+    args:
+        N/A
+    returns:
+        N/A
+    '''
     blab = ['Cookie crumbliness x3 for 60 seconds!', 'Chocolatiness x7 for 77 seconds!', 'Dough elasticity halved for 66 seconds!', 'Golden Cookie shininess doubled for 3 seconds!', 'World economy halved for 30 seconds!', 'Grandma kisses 23% stingier for 45 seconds!', 'Thanks for clicking!', 'Fooled you! This one was just a test.', 'Golden Cookies clicked +1!', 'Your click has been registered. Thank you for your cooperation.', 'Thanks! That hit the spot!', 'Thank you. A team has been dispatched.', 'They know.', 'Oops. This was just a chocolate cookie with shiny aluminium foil.', 'Mouse acceleration +0.03%!', 'All cookies multiplied by 999! All cookies divided by 999!', 'Gained 1 extra!', 'Chocolate chips reshuffled!', 'Ascension bonuses x5,000 for 0.1 seconds!', 'It seems you hallucinated that cookie.', 'Organs added.', 'Bones removed.', 'You saw nothing.', 'In theory there is no wrong way of clicking a golden cookie, but you did that, somehow.', 'Nice try, but no.', 'Randomized chance card outcome!', 'Huh? Oh, there was nothing there.', 'I felt that.', 'This golden cookie was a complete fabrication.', 'Eschaton immanentized!', 'Yippee!', 'Again.', 'Why?', "You've made a grave mistake.", 'Oh, that tickled!', "Wait, sorry, I wasn't ready yet.", 'Did you just click that?', 'Sorry, better luck next time!']
+    # picks random message from 'blab'
     blab_num = random.randint(1, 38)
     print(blab[blab_num] + "\n")
 
 def gc_spawn():
-    global gc_st, gc_got, gc_miss
+    '''
+    Chance to spawn a Golden Cookie based on value of gc_st.
 
+    args:
+        N/A
+    returns:
+        N/A
+    '''
+    global gc_st, gc_got, gc_miss
     if gc_st >= 300:
         if gc_st > 900:
             gc_st = 0
@@ -354,6 +440,14 @@ def gc_spawn():
                 print("You missed the Golden Cookie.\n")
 
 def shop(type):
+    '''
+    Preforms shop actions based on user input.
+
+    args:
+        type: item type.
+    returns:
+        N/A
+    '''
     global in_shop, num_RIF, num_CTPC, num_A, num_TF, num_C, cost_C, num_G, cost_G, num_Fr, cost_Fr, num_M, cost_M, num_Fc, cost_Fc, num_B, cost_B, num_T, cost_T, num_W, cost_W, num_S, cost_S, num_AL, cost_AL, num_Po, cost_Po, num_TM, cost_TM, num_AC, cost_AC, num_Pr, cost_Pr, num_Ch, cost_Ch, num_FE, cost_FE, num_PC, cost_PC, num_Iv, cost_Iv, num_CB, cps_CB
     type = type.lower()
 
@@ -492,6 +586,16 @@ def shop(type):
         print("Input error\n")
 
 def purchase_u(upgrade, cost, num_up):
+    '''
+    Purchase upgrades.
+
+    args:
+        upgrade: upgrade type.
+        cost: cost of upgrade.
+        num_up: number of upgrades.
+    returns:
+        num_up: number of upgrades.
+    '''
     global current_cookies
     clear()
     if current_cookies - cost >= 0:
@@ -504,6 +608,19 @@ def purchase_u(upgrade, cost, num_up):
     return num_up
 
 def purchase_b(building, num_build, cost_build, initial_cost, amount):
+    '''
+    Purchase buildings.
+
+    args:
+        building: type of building.
+        num_build: number of buildings.
+        cost_build: current cost of building.
+        initial_cost: initial cost of building.
+        amount: amount of buildings to be purchased.
+    returns:
+        num_build: number of building.
+        cost_build: cost of building.
+    '''
     global current_cookies
     i = 0
     if amount.lower() == "max" or amount.lower() == "m":
@@ -643,6 +760,7 @@ in_frenzy = 0
 in_click_frenzy = 0
 
 # time
+first_time = datetime.datetime.today()
 start_time = datetime.datetime.today()
 end_time = datetime.datetime.today()
 
@@ -656,6 +774,7 @@ load()
 if first_boot == 1:
     print("Welcome to Python Clicker; a text-based remake of the hit game Cooke Clicker!\nAll actions are preformed by entering commands in the terminal. Type '/h' or 'help' for list of commands.\n")
     first_boot = 0
+    first_time = datetime.datetime.today()
 else:
     print("Welcome back to Python Clicker!\nType '/h' or 'help' for list of commands.\n")
 
@@ -681,11 +800,17 @@ while(True):
         # update time value
         end_time = datetime.datetime.today()
 
+        # update cookie count
         total_cookies += ((end_time - start_time).total_seconds() * (cps)) + cpc
         current_cookies += ((end_time - start_time).total_seconds() * (cps)) + cpc
+        
+        # update time values
         gc_st += (end_time - start_time).total_seconds()
         start_time = datetime.datetime.today()
+
+        # chance for Golden Cookie spawn
         gc_spawn()
+
         print("+%s cookies" % display_num2(cpc))
 
     # help
@@ -697,6 +822,7 @@ while(True):
         '/st' or 'stats' - View statistics
         '/h' or 'help' - View List of Commands
         '/a' or 'about' - View About Page
+        '/c' or 'credits' - View Credits
         '/sf' or 'save' - Manual Save
         '/d' or 'delete' - Delete save file
         '/e' or 'exit' - Quit game
@@ -717,36 +843,55 @@ while(True):
     Have fun!
         """)
 
+    # credits
+    elif user_input == "/c" or user_input == "credits":
+        clear()
+        print("""Created by Cristiano Porretta
+        Original game and concept by Julien "Orteil" Thiennot
+        
+        Special Thanks:
+        Fynises - for always being there to look up to.
+        NCVPS - for providing a platform for people of all types to learn.
+        Microsoft - for creating the Intro to Python Programming curriculum.
+        You - for playing <3
+        """)
+
     # stats
     elif user_input == "/st" or user_input == "stats":
         clear()
         print("""You have cooked %s total cookies.
 You currently have %s cookies.
-cps = %s
-cpc = %s
-gc_st = %s
-gc_got = %s
-gc_miss = %s
-num_C = %d
-num_G = %d
-num_Fr = %d
-num_M = %d
-num_Fc = %d
-num_B = %d
-num_T = %d
-num_W = %d
-num_S = %d
-num_AL = %d
-num_Po = %d
-num_TM = %d
-num_AC = %d
-num_Pr = %d
-num_Ch = %d
-num_FE = %d
-num_PC = %d
-num_Iv = %d
-num_CB = %d
-""" % (display_num2(total_cookies), display_num2(current_cookies), display_num2(cps), display_num2(cpc), gc_st, gc_got, gc_miss, num_C, num_G, num_Fr, num_M, num_Fc, num_B, num_T, num_W, num_S, num_AL, num_Po, num_TM, num_AC, num_Pr, num_Ch, num_FE, num_PC, num_Iv, num_CB))
+
+You have been playing for %s.
+
+You produce %s cookies a second.
+You produce %s cookies per click.
+
+You've collected %s Golden Cookies.
+You've missed %s Golden Cookies.
+
+You have %d upgrades.
+
+You have %d cursors.
+You have %d grandmas.
+You have %d farms.
+You have %d mines.
+You have %d factories.
+You have %d banks.
+You have %d temples.
+You have %d wizard towers.
+You have %d shipments.
+You have %d alchemy labs.
+You have %d portals.
+You have %d time machines.
+You have %d antimatter condensers.
+You have %d prisms.
+You have %d chancemakers.
+You have %d fractal engines.
+You have %d python consoles.
+You have %d indleveres.
+You have %d cortex bakers.
+""" % (display_num2(total_cookies), display_num2(current_cookies), (start_time - first_time), display_num2(cps), display_num2(cpc), gc_got, gc_miss, (num_RIF + num_CTPC + num_A + num_TF), num_C, num_G, num_Fr, num_M, num_Fc, num_B, num_T, num_W, num_S, num_AL, num_Po, num_TM, num_AC, num_Pr, num_Ch, num_FE, num_PC, num_Iv, num_CB))
     
     # enter shop
     elif user_input == "/s" or user_input == "shop":

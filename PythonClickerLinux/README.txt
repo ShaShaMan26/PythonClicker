@@ -18,6 +18,7 @@ List of Commands:
         '/st' or 'stats' - View statistics
         '/h' or 'help' - View List of Commands
         '/a' or 'about' - View About Page
+        '/c' or 'credits' - View Credits
         '/sf' or 'save' - Manual Save
         '/d' or 'delete' - Delete save file
         '/e' or 'exit' - Quit game
