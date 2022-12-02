@@ -244,7 +244,7 @@ def clear():
     returns:
         N/A
     '''
-    os.system('cls')
+    os.system('clear')
 
 def display_num(num):
     '''
