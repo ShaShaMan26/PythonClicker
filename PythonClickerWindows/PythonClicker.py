@@ -11,6 +11,9 @@ Original source: https://github.com/ShaShaMan26/PythonClicker
 # imports
 import random, time, os, sys, datetime
 
+application_path = sys.path[0]
+# os.path.dirname(sys.executable)
+
 # load save function
 def load():
     '''
@@ -23,7 +26,7 @@ def load():
     '''
     global total_cookies, current_cookies, gc_st, gc_got, gc_miss, first_time, start_time, num_C, num_RIF, cost_RIF, num_CTPC, cost_CTPC, num_A, cost_A, num_TF, cost_TF, cost_C, cps_C, num_G, cost_G, cps_G, num_Fr, cost_Fr, cps_Fr, num_M, cost_M, cps_M, num_Fc, cost_Fc, cps_Fc, num_B, cost_B, cps_B, num_T, cost_T, cps_T, num_W, cost_W, cps_W, num_S, cost_S, cps_S, num_AL, cost_AL, cps_AL, num_Po,cost_Po, cps_Po, num_TM, cost_TM, cps_TM, num_AC, cost_AC, cps_AC, num_Pr, cost_Pr, cps_Pr, num_Ch, cost_Ch, cps_Ch, num_FE, cost_FE, cps_FE, num_PC, cost_PC, cps_PC, num_Iv, cost_Iv, cps_Iv, num_CB, cost_CB, cps_CB, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
     try:
-        with open(os.path.join(sys.path[0],"SaveData.txt"), "r") as save_file:
+        with open(os.path.join(application_path,"SaveData.txt"), "r") as save_file:
         
             # cookies
             total_cookies = float(save_file.readline())
@@ -155,7 +158,7 @@ def save():
     '''
     global total_cookies, current_cookies, gc_st, gc_got, gc_miss, first_time, start_time, num_C, num_RIF, cost_RIF, num_CTPC, cost_CTPC, num_A, cost_A, num_TF, cost_TF, cost_C, cps_C, num_G, cost_G, cps_G, num_Fr, cost_Fr, cps_Fr, num_M, cost_M, cps_M, num_Fc, cost_Fc, cps_Fc, num_B, cost_B, cps_B, num_T, cost_T, cps_T, num_W, cost_W, cps_W, num_S, cost_S, cps_S, num_AL, cost_AL, cps_AL, num_Po,cost_Po, cps_Po, num_TM, cost_TM, cps_TM, num_AC, cost_AC, cps_AC, num_Pr, cost_Pr, cps_Pr, num_Ch, cost_Ch, cps_Ch, num_FE, cost_FE, cps_FE, num_PC, cost_PC, cps_PC, num_Iv, cost_Iv, cps_Iv, num_CB, cost_CB, cps_CB, first_boot, in_frenzy, frenzy_end, in_click_frenzy, click_frenzy_end
     try:
-        with open(os.path.join(sys.path[0],"SaveData.txt"), "w") as save_file:
+        with open(os.path.join(application_path,"SaveData.txt"), "w") as save_file:
             # cookies
             save_file.writelines("%s\n%s\n" % (str(total_cookies), str(current_cookies)))
 
@@ -456,13 +459,13 @@ def shop(type):
             type = "reinforced index finger"
             num_RIF = purchase_u(type, cost_RIF, num_RIF)
         elif type == "carpal tunnel prevention cream" or type == "u2":
-            type == "carpal tunnel prevention cream"
+            type = "carpal tunnel prevention cream"
             num_CTPC = purchase_u(type, cost_CTPC, num_CTPC)
         elif type == "ambidextrous" or type == "u3":
-            type == "ambidextrous"
+            type = "ambidextrous"
             num_A = purchase_u(type, cost_A, num_A)
         elif type == "thousand fingers" or type == "u4":
-            type == "thousand fingers"
+            type = "thousand fingers"
             num_TF = purchase_u(type, cost_TF, num_TF)
         elif type == "cursor" or type == "1":
             type = "cursor"
@@ -598,12 +601,15 @@ def purchase_u(upgrade, cost, num_up):
     '''
     global current_cookies
     clear()
-    if current_cookies - cost >= 0:
-        current_cookies -= cost
-        num_up += 1
-        print("You now have the %s upgrade and cook [%.2f] cookies per click.\n" % (upgrade.title(), cpc))
+    if num_up < 1:
+        if current_cookies - cost >= 0:
+            current_cookies -= cost
+            num_up += 1
+            print("You now have the %s upgrade.\n" % (upgrade.title()))
+        else:
+            print("You don't have enough cookies to buy the %s upgrade.\n" % upgrade.title())
     else:
-        print("You don't have enough cookies to buy the %s upgrade.\n" % upgrade.title())
+        print("You already have the %s upgrade!\n" % upgrade.title())
 
     return num_up
 
