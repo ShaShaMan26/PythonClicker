@@ -235,15 +235,38 @@ def save():
     except:
         print("Saving error\n")
 
-def clear():
+def update():
+    global cpc, cps, end_time, total_cookies, current_cookies, gc_st, start_time, loan_lst
     '''
-    Clears terminal.
+    Updates values and clears terminal.
     
     args:
         N/A
     returns:
         N/A
     '''
+    # cpc calculation
+    cpc = (1 + (.1 * (num_TF*(num_G + num_Fr + num_M + num_Fc + num_B + num_T + num_W + num_S + num_AL + num_Po + num_TM + num_AC + num_Pr + num_Ch + num_FE + num_PC + num_Iv + num_CB)))) * (num_RIF + 1) * (num_CTPC + 1) * (num_A + 1)
+    if in_click_frenzy == 1 and end_time < click_frenzy_end:
+        cpc *= 777
+
+    # cps calculation
+    cps = cps_C*num_C + cps_G*num_G + cps_Fr*num_Fr + cps_M*num_M + cps_Fc*num_Fc + cps_B*num_B + cps_T*num_T + cps_W*num_W + cps_S*num_S + cps_AL*num_AL + cps_Po*num_Po + cps_TM*num_TM + cps_AC*num_AC + cps_Pr*num_Pr + cps_Ch*num_Ch + cps_FE*num_FE + cps_PC*num_PC + cps_Iv*num_Iv + cps_CB*num_CB
+    if in_frenzy == 1 and end_time < frenzy_end:
+        cps *= 7
+
+    # update time value
+    end_time = datetime.datetime.today()
+
+    # update cookie count
+    total_cookies += ((end_time - start_time).total_seconds() * (cps))
+    current_cookies += ((end_time - start_time).total_seconds() * (cps))
+        
+    # update time values
+    gc_st += (end_time - start_time).total_seconds()
+    start_time = datetime.datetime.today()
+
+    # system clear
     os.system('clear')
 
 def display_num(num):
@@ -423,7 +446,7 @@ def gc_spawn():
                 gc_char = chr(random.randint(97, 122))
                 chance += 1
                 if input("A golden cookie appeared! Enter '%s' to collect: " % (gc_char) ).lower() == gc_char:
-                    clear()
+                    update()
                     chance = 4
                     gc_got += 1
                     effect_num = random.randint(1, 100)
@@ -436,9 +459,9 @@ def gc_spawn():
                     elif effect_num == 100:
                         blab()
                 else:
-                    clear()
+                    update()
             if chance == 3:
-                clear()
+                update()
                 gc_miss +=1
                 print("You missed the Golden Cookie.\n")
 
@@ -526,7 +549,7 @@ def shop(type):
             num_CB, cost_CB = (purchase_b(type, num_CB, cost_CB, 1900000000000000000000000, input("\tAmount: ")))
     
         elif "desc" in type:
-            clear()
+            update()
             if type == "desc.reinforced index finger" or type == "desc.u1":
                 print("[Reinforced Index Finger] --> Reinforces fingers for optimized clicking, German Science is the finest in the world!; clicks are twice as efficient.")
             elif type == "desc.carpal tunnel prevention cream" or type == "desc.u2":
@@ -578,14 +601,14 @@ def shop(type):
             print("")
 
         elif type == "/e" or type == "exit":
-            clear()
+            update()
             in_shop = False
 
         else:
-            clear()
+            update()
             print("Input not recognized or building not unlocked\n")
     except:
-        clear()
+        update()
         print("Input error\n")
 
 def purchase_u(upgrade, cost, num_up):
@@ -600,7 +623,7 @@ def purchase_u(upgrade, cost, num_up):
         num_up: number of upgrades.
     '''
     global current_cookies
-    clear()
+    update()
     if num_up < 1:
         if current_cookies - cost >= 0:
             current_cookies -= cost
@@ -630,7 +653,7 @@ def purchase_b(building, num_build, cost_build, initial_cost, amount):
     global current_cookies
     i = 0
     if amount.lower() == "max" or amount.lower() == "m":
-        clear()
+        update()
         while(current_cookies >= cost_build):
             current_cookies -= float(cost_build)
             num_build += 1
@@ -638,7 +661,7 @@ def purchase_b(building, num_build, cost_build, initial_cost, amount):
             cost_build = initial_cost * (1.15 ** num_build)
     elif int(amount) >= 1:
         amount = int(amount)
-        clear()
+        update()
         if current_cookies >= cost_build:
             while(amount >= 1 and current_cookies >= cost_build):
                 current_cookies -= float(cost_build)
@@ -649,7 +672,7 @@ def purchase_b(building, num_build, cost_build, initial_cost, amount):
         else:
             pass
     else:
-        clear()
+        update()
         print("amount error")
     print("You were able to buy [%d] %s(s) and have [%d] total.\n" % (i, building, num_build))
 
@@ -801,7 +824,7 @@ while(True):
 
     # click
     if user_input == "":
-        clear()
+        update()
         
         # update time value
         end_time = datetime.datetime.today()
@@ -821,7 +844,7 @@ while(True):
 
     # help
     elif user_input == "/h" or user_input == "help":
-        clear()
+        update()
         print("""List of Commands:
         '' (Empty Input) - Click Cookie
         '/s' or 'shop' - Enter shop
@@ -836,7 +859,7 @@ while(True):
 
     # about
     elif user_input == "/a" or user_input == "about":
-        clear()
+        update()
         print("""About Python Clicker:
 
     Python Clicker is a limited text-based remake of the hit game Cookie Clicker within the Python coding language.
@@ -851,7 +874,7 @@ while(True):
 
     # credits
     elif user_input == "/c" or user_input == "credits":
-        clear()
+        update()
         print("""Created by Cristiano Porretta
         Original game and concept by Julien "Orteil" Thiennot
         
@@ -864,7 +887,7 @@ while(True):
 
     # stats
     elif user_input == "/st" or user_input == "stats":
-        clear()
+        update()
         print("""You have cooked %s total cookies.
 You currently have %s cookies.
 
@@ -901,7 +924,7 @@ You have %d cortex bakers.
     
     # enter shop
     elif user_input == "/s" or user_input == "shop":
-        clear()
+        update()
         in_shop = True
         while(in_shop):
             print("Enter item name or index to purchase, type 'desc.ITEM NAME/INDEX' for information, or type 'exit' to leave shop")
@@ -1007,41 +1030,41 @@ You have %d cortex bakers.
     
     # save
     elif user_input == "/sf" or user_input == "save":
-        clear()
+        update()
         save()
     
     # exit
     elif user_input == "/e" or user_input == "exit":
-        clear()
+        update()
         if input("Exit game? y/n: ").lower() == "y":
-            clear()
+            update()
             save()
             print("Goodbye :)")
             time.sleep(2)
             break
         else:
-            clear()
+            update()
     
     # delete
     elif user_input == "/d" or user_input == "delete":
-        clear()
+        update()
         if input("Delete all save data? y/n: ").lower() == "y":
             save_file = open(os.path.join(sys.path[0],"SaveData.txt"), "w")
             save_file.close()
-            clear()
+            update()
             print("All save data erased")
             time.sleep(2)
             break
         else:
-            clear()
+            update()
     
     # clear
     elif user_input == "/c" or user_input == "clear":
-        clear()
+        update()
 
     # dev
     elif user_input == "dev":
-        clear()
+        update()
         print("~~Dev Mode enabled~~")
         dev_mode = True
     
@@ -1064,5 +1087,5 @@ You have %d cortex bakers.
     
     # fallback
     else:
-        clear()
+        update()
         print("Invalid Input\n")
