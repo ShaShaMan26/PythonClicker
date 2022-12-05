@@ -12,7 +12,7 @@ Original source: https://github.com/ShaShaMan26/PythonClicker
 import random, time, os, sys, datetime
 
 application_path = sys.path[0]
-# os.path.dirname(sys.executable)
+# application_path = os.path.dirname(sys.executable)
 
 # load save function
 def load():
